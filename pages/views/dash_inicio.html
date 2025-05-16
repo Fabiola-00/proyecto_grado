@@ -1,0 +1,436 @@
+<div class="row">
+    <div class="col-md-12 d-flex justify-content-between">
+
+        <div class="stats-card primary flex-grow-1 mx-4" style="width: 250px;">
+            <i class="fas fa-users fa-3x"></i>
+            <h3 id="voluntarios-count">1</h3>
+            <p>Voluntarios Activos</p>
+            <div class="stats-trend">
+                <i class="fas fa-arrow-up"></i> <span>12% vs mes anterior</span>
+            </div>
+        </div>
+
+        <div class="stats-card secondary flex-grow-1 mx-4" style="width: 250px;">
+            <i class="fas fa-chalkboard-teacher fa-2x"></i>
+            <h3 id="instructores-count">0</h3>
+            <p>Instructores</p>
+            <div class="stats-trend">
+                <i class="fas fa-arrow-up"></i> <span>5% vs mes anterior</span>
+            </div>
+        </div>
+        <div class="stats-card success flex-grow-1 mx-4" style="width: 250px;">
+            <i class="fas fa-book fa-2x"></i>
+            <h3 id="cursos-count">0</h3>
+            <p>Cursos Activos</p>
+            <div class="stats-trend">
+                <i class="fas fa-arrow-up"></i> <span>8% vs mes anterior</span>
+            </div>
+        </div>
+        <div class="stats-card info flex-grow-1 mx-4" style="width: 250px;">
+            <i class="fas fa-calendar-check fa-2x"></i>
+            <h3 id="operaciones-count">0</h3>
+            <p>Operaciones este mes</p>
+            <div class="stats-trend">
+                <i class="fas fa-arrow-down text-danger"></i> <span>3% vs mes anterior</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4>Actividad Reciente</h4>
+                <div class="btn-group">
+                    <button class="btn btn-sm btn-outline-secondary active" data-period="week">Semana</button>
+                    <button class="btn btn-sm btn-outline-secondary" data-period="month">Mes</button>
+                    <button class="btn btn-sm btn-outline-secondary" data-period="year">Año</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="height: 300px;">
+                    <canvas id="activityChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h4>Distribución por Especialidad</h4>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="height: 300px;">
+                    <canvas id="specialtyChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>Últimos Voluntarios Registrados</h4>
+                <a href="#" data-view="voluntarios" class="btn btn-sm btn-primary">Ver todos</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Fecha Registro</th>
+                                <th>Especialidad</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-volunteers">
+                            <!-- Datos se cargarán dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>Próximos Cursos</h4>
+                <a href="#" data-view="cursos" class="btn btn-sm btn-primary">Ver todos</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Curso</th>
+                                <th>Fecha</th>
+                                <th>Instructor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="upcoming-courses">
+                            <!-- Datos se cargarán dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Variable global para mantener la instancia del gráfico
+    let activityChart;
+
+    // Función para inicializar el dashboard
+    function initDashboard() {
+        // Verificar si los elementos existen antes de manipularlos
+        const initDashboard = () => {
+            // Animación de contadores
+            animateCounter('voluntarios-count', 245);
+            animateCounter('instructores-count', 32);
+            animateCounter('cursos-count', 18);
+            animateCounter('operaciones-count', 56);
+
+            // Inicializar gráficos
+            initCharts();
+
+            // Cargar datos de tablas
+            loadTableData();
+        };
+
+        // Ejecutar la inicialización
+        initDashboard();
+    }
+
+    // Exportar la función para que pueda ser llamada desde el script principal
+    window.initDashboard = initDashboard;
+
+    function initCharts() {
+        // Gráfico de actividad
+        const activityCtx = document.getElementById('activityChart');
+        if (activityCtx) {
+            activityChart = initActivityChart('week');
+
+            // Manejar cambio de período en gráfico de actividad
+            document.querySelectorAll('[data-period]').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('[data-period]').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    if (activityChart) {
+                        activityChart.destroy();
+                    }
+                    activityChart = initActivityChart(this.dataset.period);
+                });
+            });
+        }
+
+        // Gráfico de especialidades
+        const specialtyCtx = document.getElementById('specialtyChart');
+        if (specialtyCtx) {
+            initSpecialtyChart();
+        }
+    }
+
+    function loadTableData() {
+        // Cargar datos solo si existen las tablas
+        const recentVolunteers = document.getElementById('recent-volunteers');
+        if (recentVolunteers) {
+            loadRecentVolunteers();
+        }
+
+        const upcomingCourses = document.getElementById('upcoming-courses');
+        if (upcomingCourses) {
+            loadUpcomingCourses();
+        }
+    }
+
+    function animateCounter(elementId, target) {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+
+        const duration = 2000;
+        const stepTime = 20;
+        const steps = duration / stepTime;
+        const increment = target / steps;
+        let current = Number(element.textContent) || 0;
+
+        // Limpiar cualquier intervalo existente
+        if (element.timer) {
+            clearInterval(element.timer);
+        }
+
+        element.timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                clearInterval(element.timer);
+                current = target;
+            }
+            element.textContent = Math.floor(current);
+        }, stepTime);
+    }
+
+    function initActivityChart(period) {
+        const ctx = document.getElementById('activityChart');
+        if (!ctx) return null;
+
+        const data = {
+            week: {
+                labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+                data: [12, 19, 15, 27, 34, 42, 39]
+            },
+            month: {
+                labels: Array.from({ length: 12 }, (_, i) => `Sem ${i + 1}`),
+                data: [120, 190, 150, 270, 340, 420, 390, 450, 500, 520, 550, 600]
+            },
+            year: {
+                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                data: [1200, 1900, 1500, 2700, 3400, 4200, 3900, 4500, 5000, 5200, 5500, 6000]
+            }
+        };
+
+        return new Chart(ctx.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: data[period].labels,
+                datasets: [{
+                    label: 'Participantes',
+                    data: data[period].data,
+                    backgroundColor: 'rgba(0, 51, 102, 0.1)',
+                    borderColor: '#003366',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return `Participantes: ${context.raw}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function (value) {
+                                return Number.isInteger(value) ? value : '';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function initSpecialtyChart() {
+        const ctx = document.getElementById('specialtyChart');
+        if (!ctx) return null;
+
+        return new Chart(ctx.getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Primeros Auxilios', 'Soporte Vital', 'Emergencias', 'Pediatría', 'Geriatría'],
+                datasets: [{
+                    data: [45, 30, 15, 7, 3],
+                    backgroundColor: [
+                        '#003366',
+                        '#FFCC00',
+                        '#28a745',
+                        '#17a2b8',
+                        '#dc3545'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            boxWidth: 12,
+                            padding: 20
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const value = context.raw || 0;
+                                const percentage = Math.round((value / total) * 100);
+                                return `${context.label}: ${value} (${percentage}%)`;
+                            }
+                        }
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+    }
+
+    function loadRecentVolunteers() {
+        const volunteers = [
+            { name: 'María Pérez', date: '15/06/2023', specialty: 'Primeros Auxilios' },
+            { name: 'Juan López', date: '14/06/2023', specialty: 'Soporte Vital' },
+            { name: 'Ana Gómez', date: '13/06/2023', specialty: 'Emergencias' },
+            { name: 'Carlos Ruiz', date: '12/06/2023', specialty: 'Primeros Auxilios' },
+            { name: 'Luisa Martínez', date: '10/06/2023', specialty: 'Pediatría' }
+        ];
+
+        const tbody = document.getElementById('recent-volunteers');
+        if (!tbody) return;
+
+        tbody.innerHTML = volunteers.map(vol => `
+    <tr>
+      <td>${vol.name}</td>
+      <td>${vol.date}</td>
+      <td><span class="badge badge-primary">${vol.specialty}</span></td>
+    </tr>
+  `).join('');
+    }
+
+    function loadUpcomingCourses() {
+        const courses = [
+            { name: 'Primeros Auxilios Básicos', date: '20/06/2023', instructor: 'Carlos Mendoza' },
+            { name: 'Soporte Vital Avanzado', date: '22/06/2023', instructor: 'Ana Gómez' },
+            { name: 'Manejo de Emergencias', date: '25/06/2023', instructor: 'Juan López' },
+            { name: 'Primeros Auxilios Pediátricos', date: '28/06/2023', instructor: 'Luisa Martínez' }
+        ];
+
+        const tbody = document.getElementById('upcoming-courses');
+        if (!tbody) return;
+
+        tbody.innerHTML = courses.map(course => `
+    <tr>
+      <td>${course.name}</td>
+      <td>${course.date}</td>
+      <td>${course.instructor}</td>
+    </tr>
+  `).join('');
+    }
+</script>
+
+<style>
+    /* Estilos específicos para el dashboard */
+    .stats-card {
+        position: relative;
+        padding: 20px;
+        border-radius: 8px;
+        color: white;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+
+    h3 {
+        font-size: 2rem;
+        color: white;
+    }
+
+    .stats-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .stats-card h3 {
+        font-size: 2.2rem;
+        margin: 10px 0 5px;
+    }
+
+    .stats-card p {
+        margin: 0;
+        font-size: 0.95rem;
+        opacity: 0.9;
+    }
+
+    .stats-card.secondary {
+        color: #333;
+    }
+
+    .stats-trend {
+        font-size: 0.8rem;
+        margin-top: 8px;
+        opacity: 0.8;
+    }
+
+    .stats-trend .fa-arrow-up {
+        color: var(--success-color);
+    }
+
+    .stats-trend .fa-arrow-down {
+        color: var(--danger-color);
+    }
+
+    .chart-container {
+        position: relative;
+        min-height: 300px;
+    }
+
+    .table-sm td,
+    .table-sm th {
+        padding: 0.75rem;
+    }
+
+    .btn-group .btn {
+        font-size: 0.8rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .btn-group .btn.active {
+        background-color: var(--primary-color);
+        color: white;
+    }
+</style>

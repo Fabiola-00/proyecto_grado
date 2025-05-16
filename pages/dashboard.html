@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Universidad Salesiana</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style_dashboard.css">
+    <!-- Agrega esto en el head de tu HTML -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="../index.html"> <img src="../img/sbrab_escudo.png" alt="Escudo SBRAB" class="logo"></a>
+                <button class="toggle-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active" data-view="dash_inicio"><i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a></li>
+
+                <!-- Gestión -->
+                <li class="menu-section"><span>Gestión</span></li>
+                <li><a href="#" data-view="voluntarios"><i class="fas fa-hands-helping"></i>
+                        <span>Voluntarios</span></a></li>
+                <li><a href="#" data-view="instructores"><i class="fas fa-chalkboard-teacher"></i>
+                        <span>Instructores</span></a></li>
+                <li><a href="#" data-view="especialidades"><i class="fas fa-certificate"></i>
+                        <span>Especialidades</span></a></li>
+                <li><a href="#" data-view="cursos"><i class="fas fa-book"></i> <span>Cursos</span></a></li>
+                <li><a href="#" data-view="operaciones"><i class="fas fa-tasks"></i> <span>Operaciones</span></a></li>
+
+                <!-- Evaluación -->
+                <li class="menu-section"><span>Evaluación</span></li>
+                <li><a href="#" data-view="evaluacion"><i class="fas fa-clipboard-check"></i> <span>Evaluación
+                            Instructores</span></a></li>
+
+                <!-- Reportes -->
+                <li class="menu-section"><span>Reportes</span></li>
+                <li><a href="#" data-view="asistencia-voluntarios"><i class="fas fa-user-check"></i> <span>Asistencia
+                            Voluntarios</span></a></li>
+                <li><a href="#" data-view="asistencia-instructores"><i class="fas fa-chalkboard-teacher"></i>
+                        <span>Asistencia Instructores</span></a></li>
+                <li><a href="#" data-view="cursos-realizados"><i class="fas fa-calendar-check"></i> <span>Cursos
+                            Realizados</span></a></li>
+                <li><a href="#" data-view="operaciones-realizadas"><i class="fas fa-check-circle"></i> <span>Operaciones
+                            Realizadas</span></a></li>
+
+                <!-- Administración -->
+                <li class="menu-section"><span>Administración</span></li>
+                <li><a href="#" data-view="usuarios"><i class="fas fa-users-cog"></i> <span>Usuarios</span></a></li>
+                <li><a href="#" data-view="configuracion"><i class="fas fa-cog"></i> <span>Configuración</span></a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <button class="btn btn-secondary mobile-menu-btn" style="display: none;">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h2 id="view-title">Dashdoard</h2>
+                <div class="user-info">
+                    <img src="../icons/user_icon.png" alt="Usuario">
+                    <span>Admin</span>
+                    <div style="width: 10px;"></div>
+                    <a href="../pages/login.html"><i class="fas fa-sign-out-alt"></i></a>
+                </div>
+            </header>
+
+            <!-- Contenedor dinámico para vistas -->
+            <div id="view-container" class="view-content active" data-view="dashboard"></div>
+        </main>
+    </div>
+
+    <!-- Modal Container -->
+    <div id="modal-container"></div>
+
+    <script src="../js/script_dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,448 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Gestión de Instructores</h4>
+        <div>
+            <button class="btn btn-primary" id="add-instructor-btn">
+                <i class="fas fa-plus"></i> Nuevo Instructor
+            </button>
+            <button class="btn btn-outline-secondary ml-2" id="export-instructors-btn">
+                <i class="fas fa-file-export"></i> Exportar
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="filter-bar mb-4">
+            <div class="form-group">
+                <input type="text" class="form-control" id="search-instructor" placeholder="Buscar por nombre...">
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="filter-status">
+                    <option value="">Todos los estados</option>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                    <option value="vacaciones">En vacaciones</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="filter-specialty">
+                    <option value="">Todas las especialidades</option>
+                    <option value="primeros-auxilios">Primeros Auxilios</option>
+                    <option value="soporte-vital">Soporte Vital</option>
+                    <option value="emergencias">Emergencias</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover" id="instructors-table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Especialidad</th>
+                        <th>Contacto</th>
+                        <th>Calificación</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>INS-001</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle mr-2"
+                                    width="32" height="32">
+                                Carlos Mendoza
+                            </div>
+                        </td>
+                        <td>Primeros Auxilios</td>
+                        <td>
+                            <div>carlos.mendoza@example.com</div>
+                            <small class="text-muted">555-0101</small>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                4.8
+                                <div class="stars">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star-half-alt text-warning"></i>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge badge-success">Activo</span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button class="btn btn-outline-primary edit-btn" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary details-btn" title="Detalles">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-danger delete-btn" title="Eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Más filas de instructores -->
+                    <tr>
+                        <td>INS-002</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle mr-2"
+                                    width="32" height="32">
+                                Ana Gómez
+                            </div>
+                        </td>
+                        <td>Soporte Vital</td>
+                        <td>
+                            <div>ana.gomez@example.com</div>
+                            <small class="text-muted">555-0102</small>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                4.5
+                                <div class="stars">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-secondary"></i>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge badge-success">Activo</span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button class="btn btn-outline-primary edit-btn" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary details-btn" title="Detalles">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-danger delete-btn" title="Eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>INS-003</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="https://randomuser.me/api/portraits/men/67.jpg" class="rounded-circle mr-2"
+                                    width="32" height="32">
+                                Juan Pérez
+                            </div>
+                        </td>
+                        <td>Emergencias</td>
+                        <td>
+                            <div>juan.perez@example.com</div>
+                            <small class="text-muted">555-0103</small>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                4.2
+                                <div class="stars">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="far fa-star text-secondary"></i>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge badge-warning">Vacaciones</span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button class="btn btn-outline-primary edit-btn" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary details-btn" title="Detalles">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-danger delete-btn" title="Eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="showing-entries">
+                Mostrando <span id="showing-from">1</span> a <span id="showing-to">3</span> de <span
+                    id="total-entries">3</span> registros
+            </div>
+            <nav>
+                <ul class="pagination pagination-sm">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Siguiente</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para agregar/editar instructor -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Botón para agregar nuevo instructor
+        document.getElementById('add-instructor-btn').addEventListener('click', function () {
+            showModal(`
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar Nuevo Instructor</h5>
+        <button type="button" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="instructor-form">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Nombre Completo</label>
+                <input type="text" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Identificación</label>
+                <input type="text" class="form-control" required>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" required>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Especialidad Principal</label>
+                <select class="form-control" required>
+                  <option value="">Seleccionar...</option>
+                  <option value="primeros-auxilios">Primeros Auxilios</option>
+                  <option value="soporte-vital">Soporte Vital</option>
+                  <option value="emergencias">Emergencias</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Estado</label>
+                <select class="form-control" required>
+                  <option value="activo">Activo</option>
+                  <option value="inactivo">Inactivo</option>
+                  <option value="vacaciones">En vacaciones</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Certificaciones</label>
+            <textarea class="form-control" rows="3" placeholder="Lista de certificaciones separadas por coma"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Foto</label>
+            <input type="file" class="form-control-file">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary close-modal-btn">Cancelar</button>
+        <button type="submit" form="instructor-form" class="btn btn-primary">Guardar Instructor</button>
+      </div>
+    `);
+
+            // Validación del formulario
+            document.getElementById('instructor-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                alert('Instructor agregado correctamente');
+                closeModal();
+            });
+        });
+
+        // Botones de editar en cada fila
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const row = this.closest('tr');
+                const name = row.cells[1].textContent.trim();
+
+                showModal(`
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Instructor: ${name}</h5>
+          <button type="button" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="edit-instructor-form">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Nombre Completo</label>
+                  <input type="text" class="form-control" value="${name}" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Especialidad</label>
+                  <select class="form-control" required>
+                    <option value="primeros-auxilios" ${row.cells[2].textContent.includes('Primeros') ? 'selected' : ''}>Primeros Auxilios</option>
+                    <option value="soporte-vital" ${row.cells[2].textContent.includes('Soporte') ? 'selected' : ''}>Soporte Vital</option>
+                    <option value="emergencias" ${row.cells[2].textContent.includes('Emergencias') ? 'selected' : ''}>Emergencias</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Estado</label>
+              <select class="form-control" required>
+                <option value="activo" ${row.cells[5].textContent.includes('Activo') ? 'selected' : ''}>Activo</option>
+                <option value="inactivo" ${row.cells[5].textContent.includes('Inactivo') ? 'selected' : ''}>Inactivo</option>
+                <option value="vacaciones" ${row.cells[5].textContent.includes('Vacaciones') ? 'selected' : ''}>En vacaciones</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary close-modal-btn">Cancelar</button>
+          <button type="submit" form="edit-instructor-form" class="btn btn-primary">Guardar Cambios</button>
+        </div>
+      `);
+
+                document.getElementById('edit-instructor-form').addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    alert('Cambios guardados correctamente');
+                    closeModal();
+                });
+            });
+        });
+
+        // Botones de eliminar
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const row = this.closest('tr');
+                const name = row.cells[1].textContent.trim();
+
+                showModal(`
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmar Eliminación</h5>
+          <button type="button" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>¿Está seguro que desea eliminar al instructor <strong>${name}</strong>?</p>
+          <p class="text-danger">Esta acción no se puede deshacer.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary close-modal-btn">Cancelar</button>
+          <button type="button" class="btn btn-danger" id="confirm-delete">Eliminar</button>
+        </div>
+      `);
+
+                document.getElementById('confirm-delete').addEventListener('click', function () {
+                    row.remove();
+                    updateEntryCount();
+                    alert('Instructor eliminado correctamente');
+                    closeModal();
+                });
+            });
+        });
+
+        // Exportar datos
+        document.getElementById('export-instructors-btn').addEventListener('click', function () {
+            alert('Exportando datos de instructores...');
+            // Lógica para exportar a CSV/Excel
+        });
+
+        // Función para actualizar el contador de registros
+        function updateEntryCount() {
+            const rows = document.querySelectorAll('#instructors-table tbody tr');
+            document.getElementById('showing-from').textContent = '1';
+            document.getElementById('showing-to').textContent = rows.length;
+            document.getElementById('total-entries').textContent = rows.length;
+        }
+
+        // Inicializar contador
+        updateEntryCount();
+    });
+</script>
+
+<style>
+    /* Estilos específicos para la vista de instructores */
+    #instructors-table th {
+        white-space: nowrap;
+    }
+
+    .rating {
+        display: flex;
+        align-items: center;
+    }
+
+    .rating .stars {
+        margin-left: 8px;
+        color: #ddd;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(0, 51, 102, 0.03);
+    }
+
+    .btn-group-sm .btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    .showing-entries {
+        font-size: 0.85rem;
+        color: #6c757d;
+    }
+
+    .filter-bar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .filter-bar .form-group {
+        flex: 1;
+        min-width: 200px;
+        margin-bottom: 0;
+    }
+
+    .ml-2 {
+        margin-left: 0.5rem;
+    }
+
+    .mb-4 {
+        margin-bottom: 1.5rem;
+    }
+</style>

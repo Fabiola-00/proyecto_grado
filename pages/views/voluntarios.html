@@ -1,0 +1,93 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Lista de Voluntarios</h4>
+        <button class="btn btn-primary" id="add-voluntario-btn">
+            <i class="fas fa-plus"></i> Nuevo Voluntario
+        </button>
+    </div>
+    <div class="card-body">
+        <div class="filter-bar">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Buscar por nombre...">
+            </div>
+            <div class="form-group">
+                <select class="form-control">
+                    <option value="">Todos los estados</option>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>V001</td>
+                        <td>Dante Medina</td>
+                        <td>dantemed@example.com</td>
+                        <td>555-55555</td>
+                        <td><span class="badge badge-success">Activo</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-icon btn-secondary" title="Editar">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-icon btn-danger" title="Eliminar">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Script específico para la vista de voluntarios
+    document.getElementById('add-voluntario-btn').addEventListener('click', function () {
+        showModal(`
+    <div class="modal-header">
+      <h5>Agregar Nuevo Voluntario</h5>
+      <button class="close-btn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="voluntario-form">
+        <div class="form-group">
+          <label class="form-label">Nombre Completo</label>
+          <input type="text" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Teléfono</label>
+          <input type="tel" class="form-control" required>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary close-modal-btn">Cancelar</button>
+      <button class="btn btn-primary" type="submit" form="voluntario-form">Guardar</button>
+    </div>
+  `);
+
+        // Validación del formulario
+        document.getElementById('voluntario-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Voluntario agregado correctamente');
+            closeModal();
+        });
+    });
+</script>
