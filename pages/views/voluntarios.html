@@ -1,93 +1,295 @@
 <div class="card">
-    <div class="card-header">
-        <h4>Lista de Voluntarios</h4>
-        <button class="btn btn-primary" id="add-voluntario-btn">
-            <i class="fas fa-plus"></i> Nuevo Voluntario
-        </button>
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Gestión de Voluntarios</h4>
+        <div>
+            <button class="btn btn-primary" id="add-voluntario-btn" data-bs-toggle="modal" data-bs-target="#volunteer-modal">
+                <i class="fas fa-plus me-2"></i> Nuevo Voluntario
+            </button>
+        </div>
     </div>
     <div class="card-body">
-        <div class="filter-bar">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Buscar por nombre...">
-            </div>
-            <div class="form-group">
-                <select class="form-control">
-                    <option value="">Todos los estados</option>
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
+        <div class="mb-3 row">
+            <div class="col-md-6">
+                <select class="form-select" id="year-filter">
+                    <option value="">Todos los años</option>
+                    <option value="1er año">1er año</option>
+                    <option value="2do año">2do año</option>
                 </select>
             </div>
-
         </div>
         <div class="table-responsive">
-            <table class="table">
-                <thead>
+            <table id="volunteers-table" class="table table-striped table-hover" style="width:100%">
+                <thead class="table-light">
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Teléfono</th>
+                        <th>Año</th>
+                        <th>Contacto</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>V001</td>
-                        <td>Dante Medina</td>
-                        <td>dantemed@example.com</td>
-                        <td>555-55555</td>
-                        <td><span class="badge badge-success">Activo</span></td>
-                        <td>
-                            <button class="btn btn-sm btn-icon btn-secondary" title="Editar">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-sm btn-icon btn-danger" title="Eliminar">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    <!-- Datos se cargarán dinámicamente -->
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-<script>
-    // Script específico para la vista de voluntarios
-    document.getElementById('add-voluntario-btn').addEventListener('click', function () {
-        showModal(`
-    <div class="modal-header">
-      <h5>Agregar Nuevo Voluntario</h5>
-      <button class="close-btn">&times;</button>
-    </div>
-    <div class="modal-body">
-      <form id="voluntario-form">
-        <div class="form-group">
-          <label class="form-label">Nombre Completo</label>
-          <input type="text" class="form-control" required>
+<!-- Modal para agregar/editar voluntario -->
+<div class="modal fade" id="volunteer-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title">Agregar Nuevo Voluntario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="volunteer-form">
+                    <input type="hidden" id="volunteer-id">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name" class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="document" class="form-label">Documento de Identidad</label>
+                            <input type="text" class="form-control" id="document" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="year" class="form-label">Año</label>
+                            <select class="form-select" id="year" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="1er año">1er año</option>
+                                <option value="2do año">2do año</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="status" class="form-label">Estado</label>
+                            <select class="form-select" id="status" required>
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                                <option value="Vacaciones">En vacaciones</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="certifications" class="form-label">Certificaciones</label>
+                        <textarea class="form-control" id="certifications" rows="3"
+                            placeholder="Lista de certificaciones separadas por coma"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" form="volunteer-form" class="btn btn-primary">Guardar Voluntario</button>
+            </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Teléfono</label>
-          <input type="tel" class="form-control" required>
-        </div>
-      </form>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-secondary close-modal-btn">Cancelar</button>
-      <button class="btn btn-primary" type="submit" form="voluntario-form">Guardar</button>
-    </div>
-  `);
+</div>
 
-        // Validación del formulario
-        document.getElementById('voluntario-form').addEventListener('submit', function (e) {
+<script>
+    $(document).ready(function () {
+        // Datos de ejemplo
+        const volunteersData = [
+            {
+                id: 'V001',
+                name: 'Dante Medina',
+                year: '1er año',
+                email: 'dantemed@example.com',
+                phone: '555-55555',
+                status: 'Activo',
+                rating: 4.5
+            },
+            {
+                id: 'V002',
+                name: 'María García',
+                year: '2do año',
+                email: 'maria@example.com',
+                phone: '555-55556',
+                status: 'Activo',
+                rating: 4.7
+            },
+            {
+                id: 'V003',
+                name: 'Juan Pérez',
+                year: '1er año',
+                email: 'juan@example.com',
+                phone: '555-55557',
+                status: 'Inactivo',
+                rating: 4.2
+            }
+        ];
+
+        // Inicializar DataTable
+        const table = $('#volunteers-table').DataTable({
+            data: volunteersData,
+            columns: [
+                { data: 'id' },
+                {
+                    data: 'name',
+                    render: function (data, type, row) {
+                        return `
+              <div class="d-flex align-items-center">
+                <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(data)}&background=003366&color=fff" 
+                     class="rounded-circle me-2" width="32" height="32">
+                ${data}
+              </div>
+            `;
+                    }
+                },
+                { data: 'year' },
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        return `
+              <div>${row.email}</div>
+              <small class="text-muted">${row.phone}</small>
+            `;
+                    }
+                },
+                {
+                    data: 'status',
+                    render: function (data, type, row) {
+                        const badgeClass = data === 'Activo' ? 'bg-success' :
+                            data === 'Inactivo' ? 'bg-danger' : 'bg-warning';
+                        return `<span class="badge ${badgeClass}">${data}</span>`;
+                    }
+                },
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        return `
+              <div class="btn-group btn-group-sm" role="group">
+                <button class="btn btn-outline-primary edit-btn" data-id="${row.id}">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-outline-danger delete-btn" data-id="${row.id}">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            `;
+                    },
+                    orderable: false,
+                    searchable: false
+                }
+            ],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
+            },
+            dom: '<"top"f>rt<"bottom"lip><"clear">',
+            responsive: true
+        });
+
+        // Filtrado por año
+        $('#year-filter').change(function () {
+            const year = this.value;
+            if (year) {
+                table.column(2).search(year).draw();
+            } else {
+                table.column(2).search('').draw();
+            }
+        });
+
+        // Modal para agregar voluntario
+        const volunteerModal = new bootstrap.Modal(document.getElementById('volunteer-modal'));
+        const modalTitle = document.getElementById('modal-title');
+        const volunteerForm = document.getElementById('volunteer-form');
+
+        $('#add-voluntario-btn').click(function () {
+            volunteerForm.reset();
+            $('#volunteer-id').val('');
+            modalTitle.textContent = 'Agregar Nuevo Voluntario';
+            volunteerModal.show();
+        });
+
+        // Editar voluntario
+        $('#volunteers-table').on('click', '.edit-btn', function () {
+            const volunteerId = $(this).data('id');
+            const volunteer = volunteersData.find(v => v.id === volunteerId);
+
+            if (volunteer) {
+                $('#volunteer-id').val(volunteer.id);
+                $('#name').val(volunteer.name);
+                $('#document').val(volunteer.document || '');
+                $('#email').val(volunteer.email);
+                $('#phone').val(volunteer.phone);
+                $('#year').val(volunteer.year);
+                $('#status').val(volunteer.status);
+                $('#certifications').val(volunteer.certifications || '');
+
+                modalTitle.textContent = `Editar Voluntario: ${volunteer.name}`;
+                volunteerModal.show();
+            }
+        });
+
+        // Eliminar voluntario
+        $('#volunteers-table').on('click', '.delete-btn', function () {
+            const volunteerId = $(this).data('id');
+            const volunteer = volunteersData.find(v => v.id === volunteerId);
+
+            if (volunteer) {
+                if (confirm(`¿Está seguro que desea eliminar al voluntario ${volunteer.name}?`)) {
+                    // Eliminar del array de datos
+                    const index = volunteersData.findIndex(v => v.id === volunteerId);
+                    if (index !== -1) {
+                        volunteersData.splice(index, 1);
+                    }
+                    // Eliminar de la tabla
+                    table.row($(this).parents('tr')).remove().draw();
+                    alert('Voluntario eliminado correctamente');
+                }
+            }
+        });
+
+        // Guardar voluntario
+        $('#volunteer-form').on('submit', function (e) {
             e.preventDefault();
-            alert('Voluntario agregado correctamente');
-            closeModal();
+
+            const volunteerId = $('#volunteer-id').val();
+            const isEdit = !!volunteerId;
+
+            const volunteer = {
+                id: volunteerId || `V${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`,
+                name: $('#name').val(),
+                document: $('#document').val(),
+                email: $('#email').val(),
+                phone: $('#phone').val(),
+                year: $('#year').val(),
+                status: $('#status').val(),
+                certifications: $('#certifications').val(),
+                rating: 4.5
+            };
+
+            if (isEdit) {
+                // Actualizar el registro existente
+                const index = volunteersData.findIndex(v => v.id === volunteerId);
+                if (index !== -1) {
+                    volunteersData[index] = volunteer;
+                    table.row($(this).closest('tr')).data(volunteer).draw();
+                    alert('Voluntario actualizado correctamente');
+                }
+            } else {
+                // Agregar nuevo registro
+                volunteersData.push(volunteer);
+                table.row.add(volunteer).draw();
+                alert('Voluntario agregado correctamente');
+            }
+
+            volunteerModal.hide();
         });
     });
 </script>

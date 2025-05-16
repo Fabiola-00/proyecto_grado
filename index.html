@@ -16,22 +16,27 @@
     <header class="header">
         <div class="header-container">
             <img src="img/sbrab_escudo.png" alt="Escudo SBRAB" class="logo" />
+            
+            <button class="menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
 
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#banner">Inicio</a></li>
-                <li>
-                    <a href="#">SBRAB <i class="fas fa-chevron-down"></i></a>
-                    <ul class="submenu">
-                        <li><a href="pages/historia.html">Historia</a></li>
-                        <li><a href="pages/mision.html">Misión y Visión</a></li>
-                        <li><a href="#">Autoridades</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="pages/login.html">SICOSE</a></li>
-                <li><a href="#">Equipos</a></li>
-                <li><a href="#">Contacto</a></li>
-            </ul>
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="#banner">Inicio</a></li>
+                    <li>
+                        <a href="#">SBRAB <i class="fas fa-chevron-down"></i></a>
+                        <ul class="submenu">
+                            <li><a href="pages/historia.html">Historia</a></li>
+                            <li><a href="pages/mision.html">Misión y Visión</a></li>
+                            <li><a href="#">Autoridades</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="pages/login.html">SICOSE</a></li>
+                    <li><a href="#">Equipos</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
@@ -484,8 +489,79 @@
         }); // FIN DEL OMContentLoaded
 
     </script>
+    <script>
+        // Manejo del menú de hamburguesa
+        const menuBtn = document.getElementById('menuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Manejo del submenú en móvil
+        const menuItems = document.querySelectorAll('.nav-menu li');
+        menuItems.forEach(item => {
+            const link = item.querySelector('a');
+            const submenu = item.querySelector('.submenu');
+
+            if (submenu) {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Solo manejar en móvil
+                    if (window.innerWidth <= 768) {
+                        // Remover active de otros submenús
+                        menuItems.forEach(otherItem => {
+                            otherItem.classList.remove('active');
+                        });
+                        
+                        // Activar este submenú
+                        item.classList.add('active');
+                    }
+                });
+            }
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Solo cerrar si no es un enlace de submenú
+                if (!e.target.closest('.submenu')) {
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!menuBtn.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Manejo del scroll para el header
+        let lastScroll = 0;
+        const header = document.querySelector('.header');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                header.classList.remove('scrolled');
+                return;
+            }
+            
+            if (currentScroll > lastScroll && !header.classList.contains('scrolled')) {
+                // Scrolling hacia abajo
+                header.classList.add('scrolled');
+            } else if (currentScroll < lastScroll && header.classList.contains('scrolled')) {
+                // Scrolling hacia arriba
+                header.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+    </script>
 </body>
-
-
-
 </html>
