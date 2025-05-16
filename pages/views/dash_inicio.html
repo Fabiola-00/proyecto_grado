@@ -282,7 +282,7 @@
         return new Chart(ctx.getContext('2d'), {
             type: 'doughnut',
             data: {
-                labels: ['Primeros Auxilios', 'Soporte Vital', 'Emergencias', 'Pediatría', 'Geriatría'],
+                labels: ['Primeros Auxilios', 'Rescate en Montaña', 'Rescate en Agua', 'Rescate en Selva', 'Lucha contra Incendios', 'Natación', 'K-9'],
                 datasets: [{
                     data: [45, 30, 15, 7, 3],
                     backgroundColor: [
@@ -325,10 +325,10 @@
     function loadRecentVolunteers() {
         const volunteers = [
             { name: 'María Pérez', date: '15/06/2023', specialty: 'Primeros Auxilios' },
-            { name: 'Juan López', date: '14/06/2023', specialty: 'Soporte Vital' },
-            { name: 'Ana Gómez', date: '13/06/2023', specialty: 'Emergencias' },
-            { name: 'Carlos Ruiz', date: '12/06/2023', specialty: 'Primeros Auxilios' },
-            { name: 'Luisa Martínez', date: '10/06/2023', specialty: 'Pediatría' }
+            { name: 'Juan López', date: '14/06/2023', specialty: 'Rescate en Montaña' },
+            { name: 'Ana Gómez', date: '13/06/2023', specialty: 'Rescate en Agua' },
+            { name: 'Carlos Ruiz', date: '12/06/2023', specialty: 'Rescate en Selva' },
+            { name: 'Luisa Martínez', date: '10/06/2023', specialty: 'Lucha contra Incendios' }
         ];
 
         const tbody = document.getElementById('recent-volunteers');
@@ -346,9 +346,9 @@
     function loadUpcomingCourses() {
         const courses = [
             { name: 'Primeros Auxilios Básicos', date: '20/06/2023', instructor: 'Carlos Mendoza' },
-            { name: 'Soporte Vital Avanzado', date: '22/06/2023', instructor: 'Ana Gómez' },
-            { name: 'Manejo de Emergencias', date: '25/06/2023', instructor: 'Juan López' },
-            { name: 'Primeros Auxilios Pediátricos', date: '28/06/2023', instructor: 'Luisa Martínez' }
+            { name: 'Rescate en Montaña Avanzado', date: '22/06/2023', instructor: 'Ana Gómez' },
+            { name: 'Rescate en Agua Avanzado', date: '25/06/2023', instructor: 'Juan López' },
+            { name: 'Rescate en Selva Avanzado', date: '28/06/2023', instructor: 'Luisa Martínez' }
         ];
 
         const tbody = document.getElementById('upcoming-courses');

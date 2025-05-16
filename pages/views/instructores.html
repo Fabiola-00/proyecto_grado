@@ -1,448 +1,359 @@
 <div class="card">
-    <div class="card-header">
-        <h4>Gestión de Instructores</h4>
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Gestión de Instructores</h4>
         <div>
             <button class="btn btn-primary" id="add-instructor-btn">
-                <i class="fas fa-plus"></i> Nuevo Instructor
-            </button>
-            <button class="btn btn-outline-secondary ml-2" id="export-instructors-btn">
-                <i class="fas fa-file-export"></i> Exportar
+                <i class="fas fa-plus me-2"></i> Nuevo Instructor
             </button>
         </div>
     </div>
     <div class="card-body">
-        <div class="filter-bar mb-4">
-            <div class="form-group">
-                <input type="text" class="form-control" id="search-instructor" placeholder="Buscar por nombre...">
-            </div>
-            <div class="form-group">
-                <select class="form-control" id="filter-status">
-                    <option value="">Todos los estados</option>
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
-                    <option value="vacaciones">En vacaciones</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <select class="form-control" id="filter-specialty">
+        <div class="mb-3 row">
+            <div class="col-md-6">
+                <select class="form-select" id="specialty-filter">
                     <option value="">Todas las especialidades</option>
-                    <option value="primeros-auxilios">Primeros Auxilios</option>
-                    <option value="soporte-vital">Soporte Vital</option>
-                    <option value="emergencias">Emergencias</option>
+                    <option value="Primeros Auxilios">Primeros Auxilios</option>
+                    <option value="Rescate en Montaña">Rescate en Montaña</option>
+                    <option value="Lucha contra Incendios">Lucha contra Incendios</option>
+                    <option value="Rescate en Agua">Rescate en Agua</option>
+                    <option value="Rescate en Selva">Rescate en Selva</option>
+                    <option value="Natación">Natación</option>
+                    <option value="K-9">K-9</option>
                 </select>
             </div>
-
         </div>
 
         <div class="table-responsive">
-            <table class="table table-hover" id="instructors-table">
-                <thead class="thead-light">
+            <table id="instructors-table" class="table table-striped table-hover" style="width:100%">
+                <thead class="table-light">
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Especialidad</th>
                         <th>Contacto</th>
-                        <th>Calificación</th>
                         <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>INS-001</td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle mr-2"
-                                    width="32" height="32">
-                                Carlos Mendoza
-                            </div>
-                        </td>
-                        <td>Primeros Auxilios</td>
-                        <td>
-                            <div>carlos.mendoza@example.com</div>
-                            <small class="text-muted">555-0101</small>
-                        </td>
-                        <td>
-                            <div class="rating">
-                                4.8
-                                <div class="stars">
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star-half-alt text-warning"></i>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge badge-success">Activo</span></td>
-                        <td>
-                            <div class="btn-group btn-group-sm" role="group">
-                                <button class="btn btn-outline-primary edit-btn" title="Editar">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-outline-secondary details-btn" title="Detalles">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn btn-outline-danger delete-btn" title="Eliminar">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <!-- Más filas de instructores -->
-                    <tr>
-                        <td>INS-002</td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle mr-2"
-                                    width="32" height="32">
-                                Ana Gómez
-                            </div>
-                        </td>
-                        <td>Soporte Vital</td>
-                        <td>
-                            <div>ana.gomez@example.com</div>
-                            <small class="text-muted">555-0102</small>
-                        </td>
-                        <td>
-                            <div class="rating">
-                                4.5
-                                <div class="stars">
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-secondary"></i>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge badge-success">Activo</span></td>
-                        <td>
-                            <div class="btn-group btn-group-sm" role="group">
-                                <button class="btn btn-outline-primary edit-btn" title="Editar">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-outline-secondary details-btn" title="Detalles">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn btn-outline-danger delete-btn" title="Eliminar">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>INS-003</td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="https://randomuser.me/api/portraits/men/67.jpg" class="rounded-circle mr-2"
-                                    width="32" height="32">
-                                Juan Pérez
-                            </div>
-                        </td>
-                        <td>Emergencias</td>
-                        <td>
-                            <div>juan.perez@example.com</div>
-                            <small class="text-muted">555-0103</small>
-                        </td>
-                        <td>
-                            <div class="rating">
-                                4.2
-                                <div class="stars">
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="fas fa-star text-warning"></i>
-                                    <i class="far fa-star text-secondary"></i>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge badge-warning">Vacaciones</span></td>
-                        <td>
-                            <div class="btn-group btn-group-sm" role="group">
-                                <button class="btn btn-outline-primary edit-btn" title="Editar">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-outline-secondary details-btn" title="Detalles">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn btn-outline-danger delete-btn" title="Eliminar">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                    <!-- Datos se cargarán dinámicamente -->
                 </tbody>
             </table>
-        </div>
-
-        <div class="d-flex justify-content-between align-items-center mt-3">
-            <div class="showing-entries">
-                Mostrando <span id="showing-from">1</span> a <span id="showing-to">3</span> de <span
-                    id="total-entries">3</span> registros
-            </div>
-            <nav>
-                <ul class="pagination pagination-sm">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Anterior</a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Siguiente</a>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </div>
 </div>
 
 <!-- Modal para agregar/editar instructor -->
+<div class="modal fade" id="instructor-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title">Agregar Nuevo Instructor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="instructor-form">
+                    <input type="hidden" id="instructor-id">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name" class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="document" class="form-label">Documento de Identidad</label>
+                            <input type="text" class="form-control" id="document" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="specialty" class="form-label">Especialidad Principal</label>
+                            <select class="form-select" id="specialty" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="Primeros Auxilios">Primeros Auxilios</option>
+                                <option value="Primeros Auxilios">Rescate en Montaña</option>
+                                <option value="Lucha contra Incendios">Lucha contra Incendios</option>
+                                <option value="Rescate en Agua">Rescate en Agua</option>
+                                <option value="Rescate en Selva">Rescate en Selva</option>
+                                <option value="Primeros Auxilios">Natación</option>
+                                <option value="Primeros Auxilios">K-9</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="status" class="form-label">Estado</label>
+                            <select class="form-select" id="status" required>
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                                <option value="Vacaciones">En vacaciones</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="certifications" class="form-label">Certificaciones</label>
+                        <textarea class="form-control" id="certifications" rows="3"
+                            placeholder="Lista de certificaciones separadas por coma"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" form="instructor-form" class="btn btn-primary">Guardar Instructor</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Botón para agregar nuevo instructor
-        document.getElementById('add-instructor-btn').addEventListener('click', function () {
-            showModal(`
-      <div class="modal-header">
-        <h5 class="modal-title">Agregar Nuevo Instructor</h5>
-        <button type="button" class="close-btn">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form id="instructor-form">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-label">Nombre Completo</label>
-                <input type="text" class="form-control" required>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-label">Identificación</label>
-                <input type="text" class="form-control" required>
-              </div>
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" required>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-label">Teléfono</label>
-                <input type="tel" class="form-control" required>
-              </div>
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-label">Especialidad Principal</label>
-                <select class="form-control" required>
-                  <option value="">Seleccionar...</option>
-                  <option value="primeros-auxilios">Primeros Auxilios</option>
-                  <option value="soporte-vital">Soporte Vital</option>
-                  <option value="emergencias">Emergencias</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-label">Estado</label>
-                <select class="form-control" required>
-                  <option value="activo">Activo</option>
-                  <option value="inactivo">Inactivo</option>
-                  <option value="vacaciones">En vacaciones</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label class="form-label">Certificaciones</label>
-            <textarea class="form-control" rows="3" placeholder="Lista de certificaciones separadas por coma"></textarea>
-          </div>
-          
-          <div class="form-group">
-            <label class="form-label">Foto</label>
-            <input type="file" class="form-control-file">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary close-modal-btn">Cancelar</button>
-        <button type="submit" form="instructor-form" class="btn btn-primary">Guardar Instructor</button>
-      </div>
-    `);
+    $(document).ready(function () {
+        // Datos de ejemplo
+        const instructorsData = [
+            {
+                id: 'INS-001',
+                name: 'Carlos Mendoza',
+                specialty: 'Primeros Auxilios',
+                email: 'carlos.mendoza@example.com',
+                phone: '555-0101',
+                status: 'Activo',
+                rating: 4.8
+            },
+            {
+                id: 'INS-002',
+                name: 'Ana Gómez',
+                specialty: 'Lucha contra Incendios',
+                email: 'ana.gomez@example.com',
+                phone: '555-0102',
+                status: 'Activo',
+                rating: 4.5
+            },
+            {
+                id: 'INS-003',
+                name: 'Juan Pérez',
+                specialty: 'Rescate en Agua',
+                email: 'juan.perez@example.com',
+                phone: '555-0103',
+                status: 'Vacaciones',
+                rating: 4.2
+            },
+            {
+                id: 'INS-004',
+                name: 'Luisa Martínez',
+                specialty: 'Rescate en Selva',
+                email: 'luisa.martinez@example.com',
+                phone: '555-0104',
+                status: 'Activo',
+                rating: 4.7
+            }
+        ];
 
-            // Validación del formulario
-            document.getElementById('instructor-form').addEventListener('submit', function (e) {
-                e.preventDefault();
-                alert('Instructor agregado correctamente');
-                closeModal();
-            });
+        // Inicializar DataTable
+        const table = $('#instructors-table').DataTable({
+            data: instructorsData,
+            columns: [
+                { data: 'id' },
+                {
+                    data: 'name',
+                    render: function (data, type, row) {
+                        return `
+              <div class="d-flex align-items-center">
+                <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(data)}&background=003366&color=fff" 
+                     class="rounded-circle me-2" width="32" height="32">
+                ${data}
+              </div>
+            `;
+                    }
+                },
+                { data: 'specialty' },
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        return `
+              <div>${row.email}</div>
+              <small class="text-muted">${row.phone}</small>
+            `;
+                    }
+                },
+                {
+                    data: 'status',
+                    render: function (data, type, row) {
+                        const badgeClass = data === 'Activo' ? 'bg-success' :
+                            data === 'Inactivo' ? 'bg-danger' : 'bg-warning';
+                        return `<span class="badge ${badgeClass}">${data}</span>`;
+                    }
+                },
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        return `
+              <div class="btn-group btn-group-sm" role="group">
+                <button class="btn btn-outline-primary edit-btn" data-id="${row.id}">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-outline-danger delete-btn" data-id="${row.id}">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            `;
+                    },
+                    orderable: false,
+                    searchable: false
+                }
+            ],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
+            },
+            dom: '<"top"f>rt<"bottom"lip><"clear">',
+            responsive: true
         });
 
-        // Botones de editar en cada fila
-        document.querySelectorAll('.edit-btn').forEach(btn => {
-            btn.addEventListener('click', function () {
-                const row = this.closest('tr');
-                const name = row.cells[1].textContent.trim();
-
-                showModal(`
-        <div class="modal-header">
-          <h5 class="modal-title">Editar Instructor: ${name}</h5>
-          <button type="button" class="close-btn">&times;</button>
-        </div>
-        <div class="modal-body">
-          <form id="edit-instructor-form">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="form-label">Nombre Completo</label>
-                  <input type="text" class="form-control" value="${name}" required>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="form-label">Especialidad</label>
-                  <select class="form-control" required>
-                    <option value="primeros-auxilios" ${row.cells[2].textContent.includes('Primeros') ? 'selected' : ''}>Primeros Auxilios</option>
-                    <option value="soporte-vital" ${row.cells[2].textContent.includes('Soporte') ? 'selected' : ''}>Soporte Vital</option>
-                    <option value="emergencias" ${row.cells[2].textContent.includes('Emergencias') ? 'selected' : ''}>Emergencias</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label class="form-label">Estado</label>
-              <select class="form-control" required>
-                <option value="activo" ${row.cells[5].textContent.includes('Activo') ? 'selected' : ''}>Activo</option>
-                <option value="inactivo" ${row.cells[5].textContent.includes('Inactivo') ? 'selected' : ''}>Inactivo</option>
-                <option value="vacaciones" ${row.cells[5].textContent.includes('Vacaciones') ? 'selected' : ''}>En vacaciones</option>
-              </select>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary close-modal-btn">Cancelar</button>
-          <button type="submit" form="edit-instructor-form" class="btn btn-primary">Guardar Cambios</button>
-        </div>
-      `);
-
-                document.getElementById('edit-instructor-form').addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    alert('Cambios guardados correctamente');
-                    closeModal();
-                });
-            });
+        // Filtrado por especialidad
+        $('#specialty-filter').change(function () {
+            const specialty = this.value;
+            if (specialty) {
+                table.column(2).search(specialty).draw();
+            } else {
+                table.column(2).search('').draw();
+            }
         });
 
-        // Botones de eliminar
-        document.querySelectorAll('.delete-btn').forEach(btn => {
-            btn.addEventListener('click', function () {
-                const row = this.closest('tr');
-                const name = row.cells[1].textContent.trim();
+        // Modal para agregar instructor
+        const instructorModal = new bootstrap.Modal(document.getElementById('instructor-modal'));
+        const modalTitle = document.getElementById('modal-title');
+        const instructorForm = document.getElementById('instructor-form');
 
-                showModal(`
-        <div class="modal-header">
-          <h5 class="modal-title">Confirmar Eliminación</h5>
-          <button type="button" class="close-btn">&times;</button>
-        </div>
-        <div class="modal-body">
-          <p>¿Está seguro que desea eliminar al instructor <strong>${name}</strong>?</p>
-          <p class="text-danger">Esta acción no se puede deshacer.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary close-modal-btn">Cancelar</button>
-          <button type="button" class="btn btn-danger" id="confirm-delete">Eliminar</button>
-        </div>
-      `);
+        $('#add-instructor-btn').click(function () {
+            instructorForm.reset();
+            $('#instructor-id').val('');
+            modalTitle.textContent = 'Agregar Nuevo Instructor';
+            instructorModal.show();
+        });
 
-                document.getElementById('confirm-delete').addEventListener('click', function () {
-                    row.remove();
-                    updateEntryCount();
+        // Editar instructor
+        $('#instructors-table').on('click', '.edit-btn', function () {
+            const instructorId = $(this).data('id');
+            const instructor = instructorsData.find(i => i.id === instructorId);
+
+            if (instructor) {
+                $('#instructor-id').val(instructor.id);
+                $('#name').val(instructor.name);
+                $('#document').val(instructor.document || '');
+                $('#email').val(instructor.email);
+                $('#phone').val(instructor.phone);
+                $('#specialty').val(instructor.specialty);
+                $('#status').val(instructor.status);
+                $('#certifications').val(instructor.certifications || '');
+
+                modalTitle.textContent = `Editar Instructor: ${instructor.name}`;
+                instructorModal.show();
+            }
+        });
+
+        // Eliminar instructor
+        $('#instructors-table').on('click', '.delete-btn', function () {
+            const instructorId = $(this).data('id');
+            const instructor = instructorsData.find(i => i.id === instructorId);
+
+            if (instructor) {
+                if (confirm(`¿Está seguro que desea eliminar al instructor ${instructor.name}?`)) {
+                    // Eliminar del array de datos
+                    const index = instructorsData.findIndex(i => i.id === instructorId);
+                    if (index !== -1) {
+                        instructorsData.splice(index, 1);
+                    }
+                    // Eliminar de la tabla
+                    table.row($(this).parents('tr')).remove().draw();
                     alert('Instructor eliminado correctamente');
-                    closeModal();
-                });
-            });
+                }
+            }
         });
 
-        // Exportar datos
-        document.getElementById('export-instructors-btn').addEventListener('click', function () {
-            alert('Exportando datos de instructores...');
-            // Lógica para exportar a CSV/Excel
+        // Guardar instructor
+        $('#instructor-form').on('submit', function (e) {
+            e.preventDefault();
+
+            const instructorId = $('#instructor-id').val();
+            const isEdit = !!instructorId;
+
+            const instructor = {
+                id: instructorId || `INS-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`,
+                name: $('#name').val(),
+                document: $('#document').val(),
+                email: $('#email').val(),
+                phone: $('#phone').val(),
+                specialty: $('#specialty').val(),
+                status: $('#status').val(),
+                certifications: $('#certifications').val(),
+                rating: 4.5 // Valor por defecto
+            };
+
+            if (isEdit) {
+                // Actualizar el registro existente
+                const index = instructorsData.findIndex(i => i.id === instructorId);
+                if (index !== -1) {
+                    instructorsData[index] = instructor;
+                    // Actualizar la fila en la tabla
+                    table.row($(this).closest('tr')).data(instructor).draw();
+                    alert('Instructor actualizado correctamente');
+                }
+            } else {
+                // Agregar nuevo registro
+                instructorsData.push(instructor);
+                table.row.add(instructor).draw();
+                alert('Instructor agregado correctamente');
+            }
+
+            instructorModal.hide();
         });
-
-        // Función para actualizar el contador de registros
-        function updateEntryCount() {
-            const rows = document.querySelectorAll('#instructors-table tbody tr');
-            document.getElementById('showing-from').textContent = '1';
-            document.getElementById('showing-to').textContent = rows.length;
-            document.getElementById('total-entries').textContent = rows.length;
-        }
-
-        // Inicializar contador
-        updateEntryCount();
     });
 </script>
 
 <style>
-    /* Estilos específicos para la vista de instructores */
+    /* Estilos personalizados para la tabla */
+    #instructors-table {
+        margin-top: 1rem;
+    }
+
     #instructors-table th {
         white-space: nowrap;
+        background-color: #f8f9fa;
+        color: #003366;
     }
 
-    .rating {
-        display: flex;
-        align-items: center;
-    }
-
-    .rating .stars {
-        margin-left: 8px;
-        color: #ddd;
-    }
-
-    .table-hover tbody tr:hover {
-        background-color: rgba(0, 51, 102, 0.03);
+    #instructors-table td {
+        vertical-align: middle;
     }
 
     .btn-group-sm .btn {
         padding: 0.25rem 0.5rem;
-        font-size: 0.75rem;
     }
 
-    .showing-entries {
-        font-size: 0.85rem;
-        color: #6c757d;
+    /* Estilos para el modal */
+    #instructor-modal .modal-header {
+        background-color: #003366;
+        color: white;
     }
 
-    .filter-bar {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
+    #instructor-modal .modal-footer {
+        background-color: #f8f9fa;
     }
 
-    .filter-bar .form-group {
-        flex: 1;
-        min-width: 200px;
-        margin-bottom: 0;
+    /* Estilos para los filtros */
+    #search-input,
+    #specialty-filter {
+        max-width: 100%;
     }
 
-    .ml-2 {
-        margin-left: 0.5rem;
-    }
-
-    .mb-4 {
-        margin-bottom: 1.5rem;
+    .input-group-text {
+        background-color: #003366;
+        color: white;
+        border-color: #003366;
     }
 </style>
