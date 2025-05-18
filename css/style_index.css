@@ -240,7 +240,7 @@ body {
   background-color: #003366;
 }
 
-/* Noticias */
+/* compañias */
 .news-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -523,7 +523,7 @@ body {
 /* Grid de Compañías */
 .companies-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 25px;
   margin-bottom: 40px;
 }
