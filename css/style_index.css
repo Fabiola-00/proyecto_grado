@@ -48,27 +48,9 @@ body {
 }
 
 /* Botón de menú hamburguesa */
-.menu-btn {
-  display: none;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 8px;
-}
-
-/* Menú principal */
 .nav-menu {
   display: flex;
   list-style: none;
-}
-
-.nav-menu ul {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 .nav-menu li {
@@ -87,90 +69,14 @@ body {
 }
 
 .nav-menu a:hover {
-  background-color: #FCA100;
+  background-color: #ffcc00;
   color: #003366;
   transform: translateY(-2px);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .menu-btn {
-    display: block;
-  }
-
-  .nav-menu {
-    display: none;
-    position: fixed;
-    top: 50px;
-    left: 0;
-    right: 0;
-    background: #003366;
-    padding: 15px 0;
-    z-index: 1001;
-  }
-
-  .nav-menu.active {
-    display: block;
-  }
-
-  .nav-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .nav-menu li {
-    text-align: center;
-    margin: 10px 0;
-  }
-
-  .nav-menu a {
-    display: block;
-    padding: 12px 20px;
-    color: white;
-    text-decoration: none;
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .nav-menu a:hover {
-    background: #FCA100;
-    color: #003366;
-  }
-
-  /* Submenú móvil */
-  .nav-menu .submenu {
-    display: none;
-    position: static;
-    background: #003366;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-  }
-
-  .nav-menu li.active .submenu {
-    display: block;
-  }
-
-  .submenu a {
-    padding: 12px 20px;
-    background: #003366;
-    color: white;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    width: 100%;
-    text-align: center;
-  }
-
-  .submenu a:hover {
-    background: #FCA100;
-    color: #003366;
-  }
-}
-
-/* Submenú */
-.nav-menu .submenu {
+.submenu {
+  display: none;
   position: absolute;
   background-color: white;
   min-width: 220px;
@@ -203,7 +109,11 @@ body {
   box-shadow: none;
 }
 
-/* Carrusel */
+.menu-toggle {
+  display: none;
+}
+
+/* ! Carrusel */
 .banner-container {
   margin-top: 80px;
   position: relative;
@@ -253,7 +163,7 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #FCA100;
+  background-color: #fca100;
   color: #003366;
   width: 50px;
   height: 50px;
@@ -268,7 +178,7 @@ body {
 }
 
 .carousel-control:hover {
-  background-color: #FCA100;
+  background-color: #fca100;
   transform: translateY(-50%) scale(1.1);
 }
 
@@ -300,7 +210,7 @@ body {
 }
 
 .indicator.active {
-  background-color: #FCA100;
+  background-color: #fca100;
   transform: scale(1.2);
 }
 
@@ -313,7 +223,7 @@ body {
 
 .section-title {
   color: #003366;
-  border-bottom: 3px solid #FCA100;
+  border-bottom: 3px solid #fca100;
   padding-bottom: 10px;
   margin-bottom: 30px;
   font-size: 2rem;
@@ -369,7 +279,7 @@ body {
 }
 
 .news-date {
-  color: #FCA100;
+  color: #fca100;
   font-weight: bold;
   font-size: 14px;
   margin-bottom: 10px;
@@ -386,7 +296,7 @@ body {
 }
 
 .news-card:hover h3 {
-  color: #FCA100;
+  color: #fca100;
 }
 
 .news-card p {
@@ -405,7 +315,7 @@ body {
 }
 
 .read-more:hover {
-  color: #FCA100;
+  color: #fca100;
   transform: translateX(5px);
 }
 
@@ -418,7 +328,7 @@ body {
   transform: translateX(3px);
 }
 
-/* Footer */
+/* ! Footer */
 .footer {
   background-color: #003366;
   color: white;
@@ -433,7 +343,7 @@ body {
   left: 0;
   right: 0;
   height: 5px;
-  background: linear-gradient(to right, #ffcc00, #FCA100, #ffcc00);
+  background: linear-gradient(to right, #ffcc00, #fca100, #ffcc00);
 }
 
 .footer-container {
@@ -446,7 +356,7 @@ body {
 }
 
 .footer-column h3 {
-  color: #FCA100;
+  color: #fca100;
   margin-bottom: 25px;
   font-size: 1.3rem;
   position: relative;
@@ -460,7 +370,7 @@ body {
   left: 0;
   width: 50px;
   height: 2px;
-  background-color: #FCA100;
+  background-color: #fca100;
 }
 
 .footer-column ul {
@@ -479,7 +389,7 @@ body {
 }
 
 .footer-column a:hover {
-  color: #FCA100;
+  color: #fca100;
   transform: translateX(5px);
 }
 
@@ -503,7 +413,7 @@ body {
 }
 
 .social-links a:hover {
-  background-color: #FCA100;
+  background-color: #fca100;
   color: #003366;
   transform: translateY(-5px) rotate(5deg);
 }
@@ -519,7 +429,7 @@ body {
 }
 
 .contact-item i {
-  color: #FCA100;
+  color: #fca100;
   margin-right: 15px;
   font-size: 1.2rem;
   width: 20px;
@@ -535,10 +445,11 @@ body {
   font-size: 0.9rem;
 }
 
-/* Responsive */
-@media (max-width: 992px) {
-  .banner-container {
-    height: 400px;
+/* !Responsive */
+@media (max-width: 768px) {
+  .history-hero {
+    height: 250px;
+    margin-top: 70px;
   }
 
   .slide h2 {
@@ -547,17 +458,6 @@ body {
 
   .slide p {
     font-size: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    padding: 15px;
-  }
-
-  .logo {
-    margin-bottom: 15px;
   }
 
   .nav-menu {
@@ -583,19 +483,18 @@ body {
     margin-top: 5px;
   }
 
-  .nav-menu li:hover .submenu {
-    display: none;
-  }
-
   .submenu.show {
     display: block;
   }
 
+  .left,
+  .right {
+    left: 0;
+    text-align: left;
+  }
+
   .menu-toggle {
-    display: block !important;
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    display: block;
     font-size: 1.8rem;
     cursor: pointer;
   }
@@ -672,7 +571,7 @@ body {
 }
 
 .company-card:hover h3 {
-  color: #FCA100;
+  color: #fca100;
 }
 
 .company-card p {
@@ -691,14 +590,14 @@ body {
   justify-content: center;
   transition: all 0.3s;
   padding: 8px 15px;
-  background-color: #FCA100;
+  background-color: #fca100;
   border-radius: 20px;
   font-size: 0.85rem;
 }
 
 .view-more:hover {
   background-color: #003366;
-  color: #FCA100;
+  color: #fca100;
   transform: translateY(-2px);
 }
 
@@ -782,7 +681,7 @@ body {
 .modal-text h2 {
   color: #003366;
   margin-bottom: 15px;
-  border-bottom: 2px solid #FCA100;
+  border-bottom: 2px solid #fca100;
   padding-bottom: 10px;
 }
 

@@ -11,6 +11,7 @@ body {
   background-color: #f9f9f9;
 }
 
+/* ! Header */
 .header {
   background-color: #003366;
   color: white;
@@ -46,6 +47,7 @@ body {
   height: 50px;
 }
 
+/* ! Botón de menú hamburguesa */
 .nav-menu {
   display: flex;
   list-style: none;
@@ -389,7 +391,7 @@ body {
   font-size: 0.9rem;
 }
 
-/* Responsive */
+/* !Responsive */
 @media (max-width: 768px) {
   .history-hero {
     height: 250px;
