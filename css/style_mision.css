@@ -11,6 +11,11 @@ body {
   background-color: #f9f9f9;
 }
 
+.dinamico {
+  color: #ff9900;
+  width: 50px;
+}
+
 .header {
   background-color: #003366;
   color: white;

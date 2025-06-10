@@ -1,12 +1,12 @@
 /* Estilos base y reset */
 :root {
   --primary-color: #003366;
-  --secondary-color: #FCA100;
+  --secondary-color: #fca100;
   --light-gray: #f5f5f5;
   --medium-gray: #e0e0e0;
   --dark-gray: #333333;
   --success-color: #28a745;
-  --warning-color: #FCA100;
+  --warning-color: #fca100;
   --danger-color: #dc3545;
   --info-color: #17a2b8;
 }
@@ -19,7 +19,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -179,12 +179,6 @@ body {
 
 /* Resto de los estilos... (igual que en la respuesta anterior) */
 
-
-
-
-
-
-
 /* Estilos base y reset */
 :root {
   --primary-color: #003366;
@@ -202,7 +196,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -212,7 +206,12 @@ body {
 }
 
 /* Tipografía institucional */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--primary-color);
   font-weight: 600;
 }
@@ -412,7 +411,8 @@ h1, h2, h3, h4, h5, h6 {
   border-collapse: collapse;
 }
 
-.table th, .table td {
+.table th,
+.table td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid var(--medium-gray);
@@ -481,7 +481,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-secondary:hover {
-  background-color: #FCA100;
+  background-color: #fca100;
 }
 
 .btn-success {
@@ -647,7 +647,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .tab-btn.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -1px;
   left: 0;
@@ -671,20 +671,20 @@ h1, h2, h3, h4, h5, h6 {
     left: -250px;
     height: 100vh;
   }
-  
+
   .sidebar.show {
     left: 0;
   }
-  
+
   .sidebar.collapsed {
     left: -80px;
   }
-  
+
   .main-content {
     margin-left: 0;
     width: 100%;
   }
-  
+
   .mobile-menu-btn {
     display: block;
   }
@@ -695,11 +695,11 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .user-info {
     margin-top: 10px;
   }
-  
+
   .stats-card {
     margin-bottom: 15px;
   }
@@ -707,8 +707,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .fade-in {
@@ -716,19 +721,49 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Utility classes */
-.mt-0 { margin-top: 0 !important; }
-.mb-0 { margin-bottom: 0 !important; }
-.mt-10 { margin-top: 10px !important; }
-.mb-10 { margin-bottom: 10px !important; }
-.mt-20 { margin-top: 20px !important; }
-.mb-20 { margin-bottom: 20px !important; }
+.mt-0 {
+  margin-top: 0 !important;
+}
 
-.text-center { text-align: center; }
-.text-right { text-align: right; }
+.mb-0 {
+  margin-bottom: 0 !important;
+}
 
-.d-flex { display: flex; }
-.align-items-center { align-items: center; }
-.justify-content-between { justify-content: space-between; }
+.mt-10 {
+  margin-top: 10px !important;
+}
+
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+
+.mt-20 {
+  margin-top: 20px !important;
+}
+
+.mb-20 {
+  margin-bottom: 20px !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
 
 /* Chart placeholders */
 .chart-placeholder {

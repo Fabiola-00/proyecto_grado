@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SICOSE - Reportes</title>
+    <link rel="shortcut icon" href="../icons/escudo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="css_pages/css_instructores1.css">
+</head>
+
+<body class="sidebar-expanded">
+
+    <!-- Barra Superior -->
+    <header class="top-bar">
+        <div class="logo-container">
+            <button id="toggleSidebar" aria-label="Alternar menú lateral">
+                <img src="../images/sbrab_escudo.png" alt="Logo" class="logo" />
+                <img src="../icons/navi.png" class="menu-toggle-icon">
+            </button>
+        </div>
+    </header>
+
+    <!-- Menú Lateral -->
+    <aside id="sidebar" class="sidebar">
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="../inicio.html" class="menu-item"><img src="../icons/home.png" alt="Inicio" class="icon" />
+                        <span class="text">Inicio</span></a></li>
+                <li><a href="instructores.html" class="menu-item"><img src="../icons/instructores.png" alt="Registro"
+                            class="icon" />
+                        <span class="text">Instructores</span></a></li>
+                <li><a href="voluntarios.html" class="menu-item"><img src="../icons/voluntarios.png" alt="Evaluación" class="icon" />
+                        <span class="text">Voluntarios</span></a></li>
+                <li><a href="reportes.html" class="menu-item"><img src="../icons/reportes.png" alt="Reportes" class="icon" />
+                        <span class="text">Reportes</span></a></li>
+                <li><a href="#" class="menu-item"><img src="../icons/cursos.png" alt="Cursos" class="icon" />
+                        <span class="text">Cursos</span></a></li>
+                <li><a href="#" class="menu-item"><img src="../icons/operativos.png" alt="Operativos" class="icon" />
+                        <span class="text">Operativos</span></a></li>
+                <li><a href="#" class="menu-item"><img src="../icons/settings.png" alt="Configuración" class="icon" />
+                        <span class="text">Configuración</span></a></li>
+                <li><a href="../../login.html" class="menu-item"><img src="../icons/salir.png" alt="Salir" class="icon" />
+                        <span class="text">Salir</span></a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!--  *******************************************************************************************    -->
+    <!-- Contenido Principal -->
+    <main id="content" class="content">
+        <h2>Reportes</h2><br>
+        <div class="container">
+            <!-- Botón para INSTRUCTORES -->
+            <a href="#" class="button">
+                <img src="../icons/instructores.png" alt="Registro de Instructores">
+                <span>INSTRUCTORES</span>
+            </a>
+
+            <!-- Botón para VOLUNTARIOS -->
+            <a href="#" class="button">
+                <img src="../icons/voluntarios.png" alt="Instructores">
+                <span>VOLUNTARIOS</span>
+            </a>
+
+            <!-- Botón para OTROS -->
+            <a href="#" class="button">
+                <img src="../icons/otros.png" alt="Voluntarios">
+                <span>OTROS</span>
+            </a>
+
+        </div>
+
+    </main>
+    <!--  *******************************************************************************************    -->
+    <!-- Script para funcionalidad del menú -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('toggleSidebar');
+            const body = document.body;
+
+            toggleBtn.addEventListener('click', function () {
+                body.classList.toggle('sidebar-collapsed');
+                // Accesibilidad
+                const isCollapsed = body.classList.contains('sidebar-collapsed');
+                this.setAttribute('aria-expanded', !isCollapsed);
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -241,7 +241,7 @@ body {
 }
 
 /* compañias */
-.news-grid {
+/* .news-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
@@ -259,7 +259,7 @@ body {
 .news-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-}
+} 
 
 .news-image {
   height: 200px;
@@ -326,7 +326,7 @@ body {
 
 .read-more:hover i {
   transform: translateX(3px);
-}
+} */
 
 /* ! Footer */
 .footer {
@@ -447,10 +447,10 @@ body {
 
 /* !Responsive */
 @media (max-width: 768px) {
-  .history-hero {
+  /* .history-hero {
     height: 250px;
     margin-top: 70px;
-  }
+  } */
 
   .slide h2 {
     font-size: 2rem;
