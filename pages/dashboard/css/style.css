@@ -1,0 +1,159 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  display: flex;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Clases dinámicas para estado del menú */
+body.sidebar-collapsed .sidebar {
+  width: 64px;
+}
+body.sidebar-collapsed .menu-item .text {
+  display: none;
+}
+body.sidebar-collapsed .menu-item .icon {
+  margin-right: 0;
+  justify-content: center;
+}
+
+/* Barra superior */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  background-color: #003366;
+  color: white;
+  height: 64px;
+}
+
+.logo-container button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.menu-toggle-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: transform 0.3s ease;
+  width: 24px;
+  height: 24px;
+  filter: invert(100%);
+}
+
+/* Menú lateral */
+.sidebar {
+  position: fixed;
+  top: 60px; /* Ajusta el top para evitar superposición con la barra superior */
+  left: 0;
+  width: 180px;
+  height: calc(100% - 64px); /* Ajusta la altura para evitar superposición */
+  background-color: #003366;
+  color: white;
+  transition: width 0.3s ease;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.sidebar .sidebar-nav ul {
+  list-style: none;
+  padding: 5px;
+  margin-top: 0; /* Elimina el margen superior innecesario */
+}
+
+.sidebar .sidebar-nav li {
+  margin-bottom: 16px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.menu-item:hover,
+.menu-item:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+.menu-item .icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  filter: invert(100%);
+}
+
+.menu-item .text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity 0.3s ease;
+}
+
+/* Contenido principal */
+.content {
+  margin-left: 145px;
+  padding: 85px;
+  flex: 1;
+  background-color: #fff;
+  min-height: 100vh;
+  transition: margin-left 0.3s ease;  
+}
+
+/* Estado colapsado */
+body.sidebar-collapsed .content {
+  margin-left: 20px;
+}
+
+/* Iconos PNG */
+.menu-item .icon img {
+  width: 24px;
+  height: 24px;
+  
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  body.sidebar-collapsed .content {
+    margin-left: 64px;
+  }
+
+  body.sidebar-collapsed .sidebar {
+    width: 64px;
+  }
+}
+
