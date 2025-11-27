@@ -1,0 +1,310 @@
+{
+    "format": "layers-model",
+    "generatedBy": "keras v3.0.0",
+    "convertedBy": "TensorFlow.js Converter v4.17.0",
+    "modelTopology": {
+        "keras_version": "3.0.0",
+        "backend": "tensorflow",
+        "model_config": {
+            "class_name": "Sequential",
+            "config": {
+                "name": "sequential_1",
+                "layers": [
+                    {
+                        "class_name": "Dense",
+                        "config": {
+                            "name": "Capa_Oculta_1",
+                            "trainable": true,
+                            "batch_input_shape": [
+                                null,
+                                9
+                            ],
+                            "dtype": "float32",
+                            "units": 128,
+                            "activation": "relu",
+                            "use_bias": true,
+                            "kernel_initializer": {
+                                "module": "keras.initializers",
+                                "class_name": "GlorotUniform",
+                                "config": {
+                                    "seed": null
+                                },
+                                "registered_name": null
+                            },
+                            "bias_initializer": {
+                                "module": "keras.initializers",
+                                "class_name": "Zeros",
+                                "config": {},
+                                "registered_name": null
+                            },
+                            "kernel_regularizer": null,
+                            "bias_regularizer": null,
+                            "kernel_constraint": null,
+                            "bias_constraint": null
+                        }
+                    },
+                    {
+                        "class_name": "Dense",
+                        "config": {
+                            "name": "Capa_Oculta_2",
+                            "trainable": true,
+                            "dtype": {
+                                "module": "keras",
+                                "class_name": "DTypePolicy",
+                                "config": {
+                                    "name": "float32"
+                                },
+                                "registered_name": null
+                            },
+                            "units": 64,
+                            "activation": "relu",
+                            "use_bias": true,
+                            "kernel_initializer": {
+                                "module": "keras.initializers",
+                                "class_name": "GlorotUniform",
+                                "config": {
+                                    "seed": null
+                                },
+                                "registered_name": null
+                            },
+                            "bias_initializer": {
+                                "module": "keras.initializers",
+                                "class_name": "Zeros",
+                                "config": {},
+                                "registered_name": null
+                            },
+                            "kernel_regularizer": null,
+                            "bias_regularizer": null,
+                            "kernel_constraint": null,
+                            "bias_constraint": null
+                        }
+                    },
+                    {
+                        "class_name": "Dense",
+                        "config": {
+                            "name": "Capa_Oculta_3",
+                            "trainable": true,
+                            "dtype": {
+                                "module": "keras",
+                                "class_name": "DTypePolicy",
+                                "config": {
+                                    "name": "float32"
+                                },
+                                "registered_name": null
+                            },
+                            "units": 64,
+                            "activation": "relu",
+                            "use_bias": true,
+                            "kernel_initializer": {
+                                "module": "keras.initializers",
+                                "class_name": "GlorotUniform",
+                                "config": {
+                                    "seed": null
+                                },
+                                "registered_name": null
+                            },
+                            "bias_initializer": {
+                                "module": "keras.initializers",
+                                "class_name": "Zeros",
+                                "config": {},
+                                "registered_name": null
+                            },
+                            "kernel_regularizer": null,
+                            "bias_regularizer": null,
+                            "kernel_constraint": null,
+                            "bias_constraint": null
+                        }
+                    },
+                    {
+                        "class_name": "Dense",
+                        "config": {
+                            "name": "Capa_Oculta_4",
+                            "trainable": true,
+                            "dtype": {
+                                "module": "keras",
+                                "class_name": "DTypePolicy",
+                                "config": {
+                                    "name": "float32"
+                                },
+                                "registered_name": null
+                            },
+                            "units": 32,
+                            "activation": "relu",
+                            "use_bias": true,
+                            "kernel_initializer": {
+                                "module": "keras.initializers",
+                                "class_name": "GlorotUniform",
+                                "config": {
+                                    "seed": null
+                                },
+                                "registered_name": null
+                            },
+                            "bias_initializer": {
+                                "module": "keras.initializers",
+                                "class_name": "Zeros",
+                                "config": {},
+                                "registered_name": null
+                            },
+                            "kernel_regularizer": null,
+                            "bias_regularizer": null,
+                            "kernel_constraint": null,
+                            "bias_constraint": null
+                        }
+                    },
+                    {
+                        "class_name": "Dense",
+                        "config": {
+                            "name": "Salida",
+                            "trainable": true,
+                            "dtype": {
+                                "module": "keras",
+                                "class_name": "DTypePolicy",
+                                "config": {
+                                    "name": "float32"
+                                },
+                                "registered_name": null
+                            },
+                            "units": 1,
+                            "activation": "linear",
+                            "use_bias": true,
+                            "kernel_initializer": {
+                                "module": "keras.initializers",
+                                "class_name": "GlorotUniform",
+                                "config": {
+                                    "seed": null
+                                },
+                                "registered_name": null
+                            },
+                            "bias_initializer": {
+                                "module": "keras.initializers",
+                                "class_name": "Zeros",
+                                "config": {},
+                                "registered_name": null
+                            },
+                            "kernel_regularizer": null,
+                            "bias_regularizer": null,
+                            "kernel_constraint": null,
+                            "bias_constraint": null
+                        }
+                    }
+                ]
+            }
+        },
+        "training_config": {
+            "loss": "mse",
+            "loss_weights": null,
+            "metrics": [
+                "mae",
+                "mse"
+            ],
+            "weighted_metrics": null,
+            "run_eagerly": false,
+            "steps_per_execution": 1,
+            "jit_compile": false,
+            "optimizer_config": {
+                "class_name": "Adam",
+                "config": {
+                    "name": "adam",
+                    "learning_rate": 0.0010000000474974513,
+                    "weight_decay": null,
+                    "clipnorm": null,
+                    "global_clipnorm": null,
+                    "clipvalue": null,
+                    "use_ema": false,
+                    "ema_momentum": 0.99,
+                    "ema_overwrite_frequency": null,
+                    "loss_scale_factor": null,
+                    "gradient_accumulation_steps": null,
+                    "beta_1": 0.9,
+                    "beta_2": 0.999,
+                    "epsilon": 1e-07,
+                    "amsgrad": false
+                }
+            }
+        }
+    },
+    "weightsManifest": [
+        {
+            "paths": [
+                "group1-shard1of1.bin"
+            ],
+            "weights": [
+                {
+                    "name": "Capa_Oculta_1/kernel",
+                    "shape": [
+                        9,
+                        128
+                    ],
+                    "dtype": "float32"
+                },
+                {
+                    "name": "Capa_Oculta_1/bias",
+                    "shape": [
+                        128
+                    ],
+                    "dtype": "float32"
+                },
+                {
+                    "name": "Capa_Oculta_2/kernel",
+                    "shape": [
+                        128,
+                        64
+                    ],
+                    "dtype": "float32"
+                },
+                {
+                    "name": "Capa_Oculta_2/bias",
+                    "shape": [
+                        64
+                    ],
+                    "dtype": "float32"
+                },
+                {
+                    "name": "Capa_Oculta_3/kernel",
+                    "shape": [
+                        64,
+                        64
+                    ],
+                    "dtype": "float32"
+                },
+                {
+                    "name": "Capa_Oculta_3/bias",
+                    "shape": [
+                        64
+                    ],
+                    "dtype": "float32"
+                },
+                {
+                    "name": "Capa_Oculta_4/kernel",
+                    "shape": [
+                        64,
+                        32
+                    ],
+                    "dtype": "float32"
+                },
+                {
+                    "name": "Capa_Oculta_4/bias",
+                    "shape": [
+                        32
+                    ],
+                    "dtype": "float32"
+                },
+                {
+                    "name": "Salida/kernel",
+                    "shape": [
+                        32,
+                        1
+                    ],
+                    "dtype": "float32"
+                },
+                {
+                    "name": "Salida/bias",
+                    "shape": [
+                        1
+                    ],
+                    "dtype": "float32"
+                }
+            ]
+        }
+    ]
+}
