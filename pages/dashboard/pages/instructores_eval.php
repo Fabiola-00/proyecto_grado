@@ -62,7 +62,7 @@
             <form method="POST" action="" style="width: 100%; margin-bottom: 5px;">
                 <div class="form-group" style="justify-content: center; gap: 10px;">
                     <label for="codigo_instructor" style="flex: 0 0 auto;">Código Instructor:</label>
-                    <input type="text" name="codigo_instructor" id="codigo_instructor" required style="width: 150px;">
+                    <input autocomplete="off" type="text" name="codigo_instructor" id="codigo_instructor" required style="width: 150px;">
                     <button type="submit" name="buscar_instructor" style="width: auto; margin-top: 0; padding: 8px 15px;">Buscar</button>
                 </div>
             </form>
@@ -182,6 +182,22 @@
                 document.getElementById("resultado").classList.add("error");
             }
         }
+        // Función para obtener la recomendación según el valor
+        function getRecomendacion(valor) {
+            const recomendaciones = {
+                1: "Perfil crítico: El perfil presenta limitaciones significativas en estabilidad emocional, manejo del estrés y resiliencia, lo que compromete su capacidad para actuar con eficacia en situaciones de emergencia. Su rol pasivo y baja responsabilidad indican necesidad de intervención inmediata mediante capacitación psicológica, entrenamiento en gestión de crisis y acompañamiento estructurado. Sin intervención urgente, no se recomienda su participación en misiones activas.",
+                2: "Perfil en desarrollo: Muestra potencial, pero requiere fortalecimiento en estabilidad emocional, resiliencia y toma de decisiones bajo presión. Presenta una vocación de servicio moderada y un rol observador, lo que sugiere necesidad de formación práctica en simulacros de rescate, trabajo en equipo y manejo de estrés. Con apoyo sistemático, puede alcanzar niveles funcionales.",
+                3: "Perfil incipiente: Demuestra una base funcional en habilidades clave, con estabilidad emocional media y capacidad básica para colaborar en equipos. Aunque posee cierta disciplina y empatía, su rendimiento aún es inconsistente en escenarios críticos. Se recomienda entrenamiento intensivo en liderazgo situacional, gestión de riesgos y trabajo en condiciones adversas para potenciar su desempeño.",
+                4: "Perfil funcional: Cumple con los requisitos mínimos para participar en operaciones de rescate. Muestra estabilidad emocional aceptable, capacidad de cooperación y responsabilidad media. Es apto para tareas asignadas dentro de un equipo, aunque requiere supervisión constante en situaciones complejas. Ideal para roles de apoyo en operaciones estructuradas.",
+                5: "Perfil competente: Desempeña de manera confiable en entornos de rescate, con estabilidad emocional sólida, buena resiliencia y compromiso con la misión. Capacidad demostrada para tomar decisiones razonables bajo presión y colaborar efectivamente en equipo. Apto para funciones clave en misiones, con potencial para asumir mayores responsabilidades con experiencia adicional.",
+                6: "Perfil sólido: Actúa como líder efectivo en contextos estables, mostrando alta responsabilidad, disciplina y capacidad de coordinación. Su perfil emocional equilibrado le permite mantener el control en situaciones tensas y guiar al equipo con firmeza. Recomendado para roles de liderazgo en operaciones de rescate planificadas y bajo supervisión directa.",
+                7: "Perfil destacado: Destaca por su liderazgo proactivo, toma de decisiones ágil y alta empatía en contextos de crisis. Capaz de mantener el rendimiento en condiciones extremas, motivar al equipo y adaptarse dinámicamente a cambios imprevistos. Ideal para liderar unidades de rescate en escenarios complejos o multilaterales.",
+                8: "Perfil excepcional: Representa un modelo de desempeño en el ámbito de rescate: integridad, compromiso absoluto y capacidad de inspirar confianza en momentos críticos. Su dominio del estrés, resiliencia y liderazgo son ejemplares. Recomendado para cargos estratégicos, entrenamiento de nuevos miembros y representación en operaciones de alto impacto.",
+                9: "Perfil estratégico: Posee una visión sistémica del rescate, capaz de anticipar riesgos, gestionar recursos de forma óptima y liderar equipos multidisciplinarios en crisis complejas. Su capacidad para tomar decisiones estratégicas bajo presión, combinar eficiencia con humanidad y mantener la cohesión del equipo lo convierte en un recurso clave para la planificación y ejecución de operaciones de gran escala.",
+                10: "Perfil de excelencia integral: Candidato ideal para puestos de dirección y transformación en organizaciones de rescate. Combina liderazgo inspirador, innovación en procesos de intervención, resiliencia extrema y un profundo compromiso ético con la vida humana. Su influencia trasciende el campo operativo, impulsando la cultura de seguridad, mejora continua y preparación ante emergencias a nivel institucional."
+            };
+            return recomendaciones[valor] || "Valor fuera de rango.";
+        }
 
         // Función para predecir un nuevo perfil
         async function predecir() {
@@ -212,17 +228,16 @@
                 const con = (await prediccion.data())[0];
                 console.log(con)
 
-                // Asegurar rango [1, 10]
-                // const conAjustado = Math.min(Math.max(con, 1), 10);
-
-
                 // Convertir a salida
                 const conNewSalida = con / 62;
-                console.log(conNewSalida)
 
                 // Mostrar resultado
-                resultadoEl.innerText = `Conclusión estimada: ${Math.trunc(conNewSalida)} (escala 1–10)`;
-                resultadoEl.style.color = "#27ae60";
+                let conNewSalidaFinal = Math.trunc(conNewSalida);
+                console.log(conNewSalidaFinal)
+                console.log(parseInt(conNewSalidaFinal))
+                const recomendacion = getRecomendacion(conNewSalidaFinal);
+                resultadoEl.innerHTML = `Conclusión estimada: ${conNewSalidaFinal} (escala 1–10)<br><br><strong>Recomendación:</strong> ${recomendacion}`;
+                resultadoEl.style.color = "#120c6bff";
 
                 // Liberar memoria
                 nuevoPerfil.dispose();
