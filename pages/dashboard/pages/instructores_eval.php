@@ -4,110 +4,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SICOSE - Inst. Registro</title>
+    <title>SICOSE - Inst. Evaluación</title>
     <link rel="shortcut icon" href="../icons/escudo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="css_pages/css_instructores1.css">
+    <link rel="stylesheet" href="css_pages/css_instructores_eval.css">
     <!-- Cargar TensorFlow.js -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
-
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px;
-            color: #333;
-        }
-
-        h2 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .container {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #f0f0f0;
-            padding-bottom: 10px;
-        }
-
-        .form-group:last-child {
-            border-bottom: none;
-        }
-
-        label {
-            font-weight: 500;
-            color: #555;
-            margin-right: 15px;
-            flex: 1;
-        }
-
-        input {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            width: 80px;
-            text-align: center;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        input:focus {
-            border-color: #3498db;
-            outline: none;
-        }
-
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            width: 100%;
-            margin-top: 20px;
-            transition: background 0.3s, transform 0.1s;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-        }
-
-        button:active {
-            transform: scale(0.98);
-        }
-
-        #resultado {
-            margin-top: 20px;
-            font-size: 1.2em;
-            font-weight: bold;
-            text-align: center;
-            min-height: 1.5em;
-        }
-
-        .error {
-            color: #e74c3c;
-        }
-    </style>
 
 </head>
 
@@ -155,8 +58,65 @@
         <div class="container">
             <h2>Evaluación de Instructores</h2>
 
+            <!-- Buscador de Instructor -->
+            <form method="POST" action="" style="width: 100%; margin-bottom: 5px;">
+                <div class="form-group" style="justify-content: center; gap: 10px;">
+                    <label for="codigo_instructor" style="flex: 0 0 auto;">Código Instructor:</label>
+                    <input type="text" name="codigo_instructor" id="codigo_instructor" required style="width: 150px;">
+                    <button type="submit" name="buscar_instructor" style="width: auto; margin-top: 0; padding: 8px 15px;">Buscar</button>
+                </div>
+            </form>
+
+            <?php
+            // Lógica de búsqueda
+            $instructor_encontrado = null;
+            $mensaje_error = "";
+            $codigo_buscado = "";
+
+            if (isset($_POST['buscar_instructor'])) {
+                $codigo_buscado = $_POST['codigo_instructor'];
+
+                // Conexión a la base de datos (usando la ruta relativa correcta)
+                $db_file = __DIR__ . '/data/db_sbrab.sqlite';
+
+                try {
+                    $pdo = new PDO('sqlite:' . $db_file);
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                    $stmt = $pdo->prepare("SELECT * FROM instructores WHERE codigo = :codigo");
+                    $stmt->execute([':codigo' => $codigo_buscado]);
+                    $instructor = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    if ($instructor) {
+                        // Verificar si ya fue evaluado
+                        $stmt_eval = $pdo->prepare("SELECT COUNT(*) FROM evaluaciones WHERE instructor_id = :id");
+                        $stmt_eval->execute([':id' => $instructor['id']]);
+                        $estado_evaluacion = $stmt_eval->fetchColumn() > 0 ? "Evaluado" : "No Evaluado";
+                        $instructor['estado_evaluacion'] = $estado_evaluacion;
+
+                        $instructor_encontrado = $instructor;
+                    } else {
+                        $mensaje_error = "Código erróneo";
+                    }
+                } catch (PDOException $e) {
+                    $mensaje_error = "Error de base de datos: " . $e->getMessage();
+                }
+            }
+            ?>
+
+            <?php if ($instructor_encontrado): ?>
+                <div style="text-align: center; margin-bottom: 10px; color: #27ae60; font-weight: bold;">
+                    <p>Instructor: <?php echo htmlspecialchars($instructor_encontrado['nombres'] . ' ' . $instructor_encontrado['apellido_paterno']); ?> (<?php echo htmlspecialchars($instructor_encontrado['estado_evaluacion']); ?>)</p>
+                    <input type="hidden" id="instructor_id" value="<?php echo $instructor_encontrado['id']; ?>">
+                </div>
+            <?php elseif ($mensaje_error): ?>
+                <div style="text-align: center; margin-bottom: 10px; color: #e74c3c; font-weight: bold;">
+                    <p><?php echo $mensaje_error; ?></p>
+                </div>
+            <?php endif; ?>
+
             <div id="form-container">
-                <!-- Inputs generated here or hardcoded -->
+                <!-- Inputs de evaluación -->
                 <div class="form-group"><label>EE (Estabilidad Emocional) 0 - 10</label><input min="0" max="10"
                         type="number" id="input-0" value="0">
                 </div>
@@ -186,7 +146,7 @@
             </div>
             <br>
 
-            <button onclick="predecir()">Predecir</button>
+            <button onclick="predecir()">Evaluar</button>
             <p id="resultado"></p>
         </div>
 
