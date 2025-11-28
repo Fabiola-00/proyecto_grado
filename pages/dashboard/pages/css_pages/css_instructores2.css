@@ -57,6 +57,12 @@ a:hover {
     gap: 0.5rem;
 }
 
+.filter-actions {
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+
 .search-form label {
     font-weight: bold;
     margin-bottom: 0.25rem;
@@ -140,7 +146,8 @@ a:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-width: 90vw; /* Máximo ancho del viewport */
+    max-width: 90vw;
+    /* Máximo ancho del viewport */
     width: 400px;
     border-radius: 8px;
     padding: 2rem;
@@ -150,7 +157,8 @@ a:hover {
 }
 
 .modal::backdrop {
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro detrás del modal */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fondo oscuro detrás del modal */
 }
 
 .modal-content {
