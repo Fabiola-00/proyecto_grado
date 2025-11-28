@@ -1,3 +1,52 @@
+<?php
+if (isset($_POST['guardar_evaluacion'])) {
+    header('Content-Type: application/json');
+    $db_file = __DIR__ . '/data/db_sbrab.sqlite';
+
+    try {
+        $pdo = new PDO('sqlite:' . $db_file);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Crear tabla si no existe (por seguridad)
+        $sql_create = "CREATE TABLE IF NOT EXISTS evaluaciones (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            instructor_id INTEGER,
+            ee REAL, me REAL, re REAL, te REAL, vs REAL,
+            rs REAL, di REAL, td REAL, em REAL,
+            conclusion REAL, recomendacion TEXT,
+            fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )";
+        $pdo->exec($sql_create);
+
+        $stmt = $pdo->prepare("INSERT INTO evaluaciones (instructor_id, ee, me, re, te, vs, rs, di, td, em, con, reco) 
+                              VALUES (:instructor_id, :ee, :me, :re, :te, :vs, :rs, :di, :td, :em, :con, :reco)");
+
+        $stmt->execute([
+            ':instructor_id' => $_POST['instructor_id'],
+            ':ee' => $_POST['ee'],
+            ':me' => $_POST['me'],
+            ':re' => $_POST['re'],
+            ':te' => $_POST['te'],
+            ':vs' => $_POST['vs'],
+            ':rs' => $_POST['rs'],
+            ':di' => $_POST['di'],
+            ':td' => $_POST['td'],
+            ':em' => $_POST['em'],
+            ':con' => $_POST['con'],
+            ':reco' => $_POST['reco']
+        ]);
+
+        // Actualizar estado del instructor a "Evaluado"
+        $stmt_update = $pdo->prepare("UPDATE instructores SET estado = 'Evaluado' WHERE id = :id");
+        $stmt_update->execute([':id' => $_POST['instructor_id']]);
+
+        echo json_encode(['status' => 'success', 'message' => 'Evaluación guardada y estado actualizado correctamente.']);
+    } catch (Exception $e) {
+        echo json_encode(['status' => 'error', 'message' => 'Error al guardar: ' . $e->getMessage()]);
+    }
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -88,12 +137,6 @@
                     $instructor = $stmt->fetch(PDO::FETCH_ASSOC);
 
                     if ($instructor) {
-                        // Verificar si ya fue evaluado
-                        $stmt_eval = $pdo->prepare("SELECT COUNT(*) FROM evaluaciones WHERE instructor_id = :id");
-                        $stmt_eval->execute([':id' => $instructor['id']]);
-                        $estado_evaluacion = $stmt_eval->fetchColumn() > 0 ? "Evaluado" : "No Evaluado";
-                        $instructor['estado_evaluacion'] = $estado_evaluacion;
-
                         $instructor_encontrado = $instructor;
                     } else {
                         $mensaje_error = "Código erróneo";
@@ -106,7 +149,7 @@
 
             <?php if ($instructor_encontrado): ?>
                 <div style="text-align: center; margin-bottom: 10px; color: #27ae60; font-weight: bold;">
-                    <p>Instructor: <?php echo htmlspecialchars($instructor_encontrado['nombres'] . ' ' . $instructor_encontrado['apellido_paterno']); ?> (<?php echo htmlspecialchars($instructor_encontrado['estado_evaluacion']); ?>)</p>
+                    <p id="instructor-info">Sr. <?php echo htmlspecialchars($instructor_encontrado['grado'] . ' ' . $instructor_encontrado['apellido_paterno'] . ' ' . $instructor_encontrado['nombres']); ?> (<?php echo htmlspecialchars($instructor_encontrado['estado']); ?>)</p>
                     <input type="hidden" id="instructor_id" value="<?php echo $instructor_encontrado['id']; ?>">
                 </div>
             <?php elseif ($mensaje_error): ?>
@@ -148,6 +191,8 @@
 
             <button onclick="predecir()">Evaluar</button>
             <p id="resultado"></p>
+            <button type="button" onclick="guardarEvaluacion()" style="margin-right:10px;">Guardar Evaluación</button>
+            <button type="button" onclick="resetForm()">Reiniciar</button>
         </div>
 
     </main>
@@ -169,6 +214,8 @@
 
         // Segmento del Modelo de Evaluación
         let modelo;
+        let currentConclusion = null;
+        let currentRecomendacion = "";
 
         // Cargar el modelo al iniciar
         async function cargarModelo() {
@@ -182,19 +229,20 @@
                 document.getElementById("resultado").classList.add("error");
             }
         }
+
         // Función para obtener la recomendación según el valor
         function getRecomendacion(valor) {
             const recomendaciones = {
-                1: "Perfil crítico: El perfil presenta limitaciones significativas en estabilidad emocional, manejo del estrés y resiliencia, lo que compromete su capacidad para actuar con eficacia en situaciones de emergencia. Su rol pasivo y baja responsabilidad indican necesidad de intervención inmediata mediante capacitación psicológica, entrenamiento en gestión de crisis y acompañamiento estructurado. Sin intervención urgente, no se recomienda su participación en misiones activas.",
-                2: "Perfil en desarrollo: Muestra potencial, pero requiere fortalecimiento en estabilidad emocional, resiliencia y toma de decisiones bajo presión. Presenta una vocación de servicio moderada y un rol observador, lo que sugiere necesidad de formación práctica en simulacros de rescate, trabajo en equipo y manejo de estrés. Con apoyo sistemático, puede alcanzar niveles funcionales.",
-                3: "Perfil incipiente: Demuestra una base funcional en habilidades clave, con estabilidad emocional media y capacidad básica para colaborar en equipos. Aunque posee cierta disciplina y empatía, su rendimiento aún es inconsistente en escenarios críticos. Se recomienda entrenamiento intensivo en liderazgo situacional, gestión de riesgos y trabajo en condiciones adversas para potenciar su desempeño.",
-                4: "Perfil funcional: Cumple con los requisitos mínimos para participar en operaciones de rescate. Muestra estabilidad emocional aceptable, capacidad de cooperación y responsabilidad media. Es apto para tareas asignadas dentro de un equipo, aunque requiere supervisión constante en situaciones complejas. Ideal para roles de apoyo en operaciones estructuradas.",
-                5: "Perfil competente: Desempeña de manera confiable en entornos de rescate, con estabilidad emocional sólida, buena resiliencia y compromiso con la misión. Capacidad demostrada para tomar decisiones razonables bajo presión y colaborar efectivamente en equipo. Apto para funciones clave en misiones, con potencial para asumir mayores responsabilidades con experiencia adicional.",
-                6: "Perfil sólido: Actúa como líder efectivo en contextos estables, mostrando alta responsabilidad, disciplina y capacidad de coordinación. Su perfil emocional equilibrado le permite mantener el control en situaciones tensas y guiar al equipo con firmeza. Recomendado para roles de liderazgo en operaciones de rescate planificadas y bajo supervisión directa.",
-                7: "Perfil destacado: Destaca por su liderazgo proactivo, toma de decisiones ágil y alta empatía en contextos de crisis. Capaz de mantener el rendimiento en condiciones extremas, motivar al equipo y adaptarse dinámicamente a cambios imprevistos. Ideal para liderar unidades de rescate en escenarios complejos o multilaterales.",
-                8: "Perfil excepcional: Representa un modelo de desempeño en el ámbito de rescate: integridad, compromiso absoluto y capacidad de inspirar confianza en momentos críticos. Su dominio del estrés, resiliencia y liderazgo son ejemplares. Recomendado para cargos estratégicos, entrenamiento de nuevos miembros y representación en operaciones de alto impacto.",
-                9: "Perfil estratégico: Posee una visión sistémica del rescate, capaz de anticipar riesgos, gestionar recursos de forma óptima y liderar equipos multidisciplinarios en crisis complejas. Su capacidad para tomar decisiones estratégicas bajo presión, combinar eficiencia con humanidad y mantener la cohesión del equipo lo convierte en un recurso clave para la planificación y ejecución de operaciones de gran escala.",
-                10: "Perfil de excelencia integral: Candidato ideal para puestos de dirección y transformación en organizaciones de rescate. Combina liderazgo inspirador, innovación en procesos de intervención, resiliencia extrema y un profundo compromiso ético con la vida humana. Su influencia trasciende el campo operativo, impulsando la cultura de seguridad, mejora continua y preparación ante emergencias a nivel institucional."
+                1: "Perfil crítico: Requiere intervención urgente.",
+                2: "Perfil en desarrollo: Necesita entrenamiento básico.",
+                3: "Perfil incipiente: Potencial mejorable con apoyo.",
+                4: "Perfil funcional: Cumple expectativas básicas.",
+                5: "Perfil competente: Desempeño confiable y estable.",
+                6: "Perfil sólido: Liderazgo efectivo en entornos estables.",
+                7: "Perfil destacado: Excelente desempeño en equipos dinámicos.",
+                8: "Perfil excepcional: Modelo de liderazgo y compromiso.",
+                9: "Perfil estratégico: Con capacidad probada para gestionar crisis, motivar equipos y tomar decisiones complejas. Ideal para roles de alta responsabilidad.",
+                10: "Perfil de excelencia integral: Candidato ideal para puestos directivos o de impacto organizacional."
             };
             return recomendaciones[valor] || "Valor fuera de rango.";
         }
@@ -230,12 +278,16 @@
 
                 // Convertir a salida
                 const conNewSalida = con / 62;
+                console.log(conNewSalida)
 
                 // Mostrar resultado
                 let conNewSalidaFinal = Math.trunc(conNewSalida);
-                console.log(conNewSalidaFinal)
-                console.log(parseInt(conNewSalidaFinal))
                 const recomendacion = getRecomendacion(conNewSalidaFinal);
+
+                // Guardar en variables globales
+                currentConclusion = conNewSalidaFinal;
+                currentRecomendacion = recomendacion;
+
                 resultadoEl.innerHTML = `Conclusión estimada: ${conNewSalidaFinal} (escala 1–10)<br><br><strong>Recomendación:</strong> ${recomendacion}`;
                 resultadoEl.style.color = "#120c6bff";
 
@@ -246,6 +298,75 @@
                 console.error(error);
                 resultadoEl.innerText = "⚠️ " + error.message;
                 resultadoEl.classList.add("error");
+            }
+        }
+
+        async function guardarEvaluacion() {
+            const instructorId = document.getElementById('instructor_id')?.value;
+
+            if (!instructorId) {
+                alert("Por favor, busque y seleccione un instructor primero.");
+                return;
+            }
+            if (currentConclusion === null) {
+                alert("Por favor, realice la evaluación primero.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('guardar_evaluacion', '1');
+            formData.append('instructor_id', instructorId);
+
+            // Agregar valores de los inputs
+            for (let i = 0; i < 9; i++) {
+                const val = document.getElementById(`input-${i}`).value;
+                const labels = ['ee', 'me', 're', 'te', 'vs', 'rs', 'di', 'td', 'em'];
+                formData.append(labels[i], val);
+            }
+
+            formData.append('con', currentConclusion);
+            formData.append('reco', currentRecomendacion);
+
+            try {
+                const response = await fetch(window.location.href, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    alert(data.message);
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al procesar la solicitud.');
+            }
+        }
+
+        function resetForm() {
+            // Reiniciar inputs a sus valores por defecto
+            const defaults = [0, 0, 0, 1, 0, 1, 0, 1, 0];
+            for (let i = 0; i < 9; i++) {
+                document.getElementById(`input-${i}`).value = defaults[i];
+            }
+
+            // Limpiar resultado y variables globales
+            document.getElementById('resultado').innerHTML = "";
+            currentConclusion = null;
+            currentRecomendacion = "";
+
+            // Limpiar info instructor y busqueda
+            const instructorInfo = document.getElementById('instructor-info');
+            if (instructorInfo) {
+                instructorInfo.innerHTML = "";
+                instructorInfo.style.display = "none"; // Ocultar el div vacio
+            }
+            // Assuming 'codigo_instructor' is the ID of the search input for the instructor
+            const searchInput = document.getElementById('codigo_instructor');
+            if (searchInput) {
+                searchInput.value = "";
             }
         }
 
