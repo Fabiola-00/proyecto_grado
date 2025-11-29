@@ -65,7 +65,7 @@ try {
         <li><a href="instructores.html" class="menu-item"><img src="../icons/instructores.png" alt="Registro"
               class="icon" />
             <span class="text">Instructores</span></a></li>
-        <li><a href="asistencia.html" class="menu-item"><img src="../icons/voluntarios.png" alt="Evaluación" class="icon" />
+        <li><a href="asistencia.html" class="menu-item"><img src="../icons/asistencia.png" alt="Asistencia" class="icon" />
             <span class="text">Asistencia</span></a></li>
         <li><a href="reportes.html" class="menu-item"><img src="../icons/reportes.png" alt="Reportes" class="icon" />
             <span class="text">Reportes</span></a></li>

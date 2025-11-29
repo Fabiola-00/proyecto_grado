@@ -32,7 +32,7 @@
                 <li><a href="instructores.html" class="menu-item"><img src="../icons/instructores.png" alt="Registro"
                             class="icon" />
                         <span class="text">Instructores</span></a></li>
-                <li><a href="asistencia.html" class="menu-item"><img src="../icons/voluntarios.png" alt="Evaluación" class="icon" />
+                <li><a href="asistencia.html" class="menu-item"><img src="../icons/asistencia.png" alt="Asistencia" class="icon" />
                         <span class="text">Asistencia</span></a></li>
                 <li><a href="#" class="menu-item"><img src="../icons/reportes.png" alt="Reportes" class="icon" />
                         <span class="text">Reportes</span></a></li>
@@ -113,8 +113,8 @@
                 <label for="estado">Estado:</label>
                 <select id="estado" name="estado" required>
                     <option value="">Seleccione...</option>
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
+                    <option value="Evaluado">Evaluado</option>
+                    <option value="No evaluado">No evaluado</option>
                 </select>
 
                 <!-- Botón -->
