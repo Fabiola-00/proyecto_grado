@@ -29,6 +29,31 @@ try {
         // Si falla (por ejemplo, tabla no existe), simplemente no mostramos evaluaciones
         $errorEvaluaciones = $e->getMessage();
     }
+
+    // Obtener registros de asistencia del instructor
+    $asistencias = [];
+    $estadisticasAsistencia = [
+        'Ordinaria' => 0,
+        'Extraordinaria' => 0,
+        'Operación' => 0,
+        'Permiso' => 0,
+        'Falta' => 0,
+        'total' => 0
+    ];
+
+    try {
+        $stmtAsis = $pdo->prepare("SELECT fecha, tipo FROM asistencia WHERE instructor_id = ? ORDER BY fecha DESC");
+        $stmtAsis->execute([$id]);
+        $asistencias = $stmtAsis->fetchAll(PDO::FETCH_ASSOC);
+
+        // Calcular estadísticas
+        foreach ($asistencias as $asistencia) {
+            $estadisticasAsistencia[$asistencia['tipo']]++;
+            $estadisticasAsistencia['total']++;
+        }
+    } catch (PDOException $e) {
+        $errorAsistencias = $e->getMessage();
+    }
 } catch (PDOException $e) {
     die("Error al cargar datos: " . $e->getMessage());
 }
@@ -332,6 +357,55 @@ try {
             <?php endif; ?>
         <?php endif; ?>
     </div>
+
+    <!-- Sección de Asistencia -->
+    <?php if (!empty($asistencias)): ?>
+        <div class="section">
+            <h2>Estadísticas de Asistencia</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ordinaria</th>
+                        <th>Extraordinaria</th>
+                        <th>Operación</th>
+                        <th>Permiso</th>
+                        <th>Falta</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><?= $estadisticasAsistencia['Ordinaria'] ?></td>
+                        <td><?= $estadisticasAsistencia['Extraordinaria'] ?></td>
+                        <td><?= $estadisticasAsistencia['Operación'] ?></td>
+                        <td><?= $estadisticasAsistencia['Permiso'] ?></td>
+                        <td><?= $estadisticasAsistencia['Falta'] ?></td>
+                        <td><strong><?= $estadisticasAsistencia['total'] ?></strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Detalle de Registros de Asistencia</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($asistencias as $asis): ?>
+                        <tr>
+                            <td><?= date('d/m/Y', strtotime($asis['fecha'])) ?></td>
+                            <td><?= htmlspecialchars($asis['tipo']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif; ?>
 
     <div class="footer">
         <p>Generado el <?= date('d/m/Y') ?></p>
