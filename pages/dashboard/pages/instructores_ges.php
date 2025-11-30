@@ -69,12 +69,11 @@ try {
             <span class="text">Asistencia</span></a></li>
         <li><a href="reportes.html" class="menu-item"><img src="../icons/reportes.png" alt="Reportes" class="icon" />
             <span class="text">Reportes</span></a></li>
-        <li><a href="#" class="menu-item"><img src="../icons/cursos.png" alt="Cursos" class="icon" />
+        <li><a href="cursos.html" class="menu-item"><img src="../icons/cursos.png" alt="Cursos" class="icon" />
             <span class="text">Cursos</span></a></li>
-        <li><a href="#" class="menu-item"><img src="../icons/operativos.png" alt="Operativos" class="icon" />
+        <li><a href="operativos.html" class="menu-item"><img src="../icons/operativos.png" alt="Operativos" class="icon" />
             <span class="text">Operativos</span></a></li>
-        <li><a href="#" class="menu-item"><img src="../icons/settings.png" alt="Configuración" class="icon" />
-            <span class="text">Configuración</span></a></li>
+
         <li><a href="../../login.html" class="menu-item"><img src="../icons/salir.png" alt="Salir" class="icon" />
             <span class="text">Salir</span></a></li>
       </ul>
@@ -321,29 +320,10 @@ try {
             <option value="Rescate en Montaña">Rescate en Montaña</option>
             <option value="Rescate en Selva">Rescate en Selva</option>
             <option value="Lucha contra incendios">Lucha contra incendios</option>
-            <option value="Natación">Natación</option>
-            <option value="K-9">K-9</option>
-          </select>
-
-          <label for="estado_edit">Estado:</label>
-          <select id="estado_edit" name="estado" required>
-            <option value="">Seleccione...</option>
-            <option value="Evaluado">Evaluado</option>
-            <option value="No evaluado">No evaluado</option>
-          </select>
-
-          <button type="submit" name="accion" value="editar">Guardar cambios</button>
-          <button type="button" onclick="cerrarModal()">Cancelar</button>
-        </form>
-      </dialog>
-
-      <!-- Modal de eliminación -->
-      <dialog id="modalEliminar" class="modal">
-        <form method="POST" class="modal-content">
-          <h3>¿Está seguro de eliminar este instructor?</h3>
-          <input type="hidden" id="instructor_id_eliminar" name="id">
-          <button type="submit" name="accion" value="eliminar">Sí, eliminar</button>
-          <button type="button" onclick="cerrarModal()">No, cancelar</button>
+            <h3>¿Está seguro de eliminar este instructor?</h3>
+            <input type="hidden" id="instructor_id_eliminar" name="id">
+            <button type="submit" name="accion" value="eliminar">Sí, eliminar</button>
+            <button type="button" onclick="cerrarModal()">No, cancelar</button>
         </form>
       </dialog>
     </div>

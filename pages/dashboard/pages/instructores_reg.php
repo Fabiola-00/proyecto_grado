@@ -34,14 +34,13 @@
                         <span class="text">Instructores</span></a></li>
                 <li><a href="asistencia.html" class="menu-item"><img src="../icons/asistencia.png" alt="Asistencia" class="icon" />
                         <span class="text">Asistencia</span></a></li>
-                <li><a href="#" class="menu-item"><img src="../icons/reportes.png" alt="Reportes" class="icon" />
+                <li><a href="reportes.html" class="menu-item"><img src="../icons/reportes.png" alt="Reportes" class="icon" />
                         <span class="text">Reportes</span></a></li>
-                <li><a href="#" class="menu-item"><img src="../icons/cursos.png" alt="Cursos" class="icon" />
+                <li><a href="cursos.html" class="menu-item"><img src="../icons/cursos.png" alt="Cursos" class="icon" />
                         <span class="text">Cursos</span></a></li>
-                <li><a href="#" class="menu-item"><img src="../icons/operativos.png" alt="Operativos" class="icon" />
+                <li><a href="operativos.html" class="menu-item"><img src="../icons/operativos.png" alt="Operativos" class="icon" />
                         <span class="text">Operativos</span></a></li>
-                <li><a href="#" class="menu-item"><img src="../icons/settings.png" alt="Configuración" class="icon" />
-                        <span class="text">Configuración</span></a></li>
+
                 <li><a href="../../login.html" class="menu-item"><img src="../icons/salir.png" alt="Salir" class="icon" />
                         <span class="text">Salir</span></a></li>
             </ul>

@@ -25,6 +25,32 @@ try {
     ";
     $pdo->exec($sql);
 
+    // Crear tabla de cursos
+    $sql_cursos = "
+        CREATE TABLE IF NOT EXISTS cursos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            tipo TEXT NOT NULL,
+            entidad TEXT NOT NULL,
+            nombre TEXT NOT NULL,
+            fecha_inicio DATE NOT NULL,
+            fecha_fin DATE NOT NULL,
+            observaciones TEXT
+        )
+    ";
+    $pdo->exec($sql_cursos);
+
+    // Crear tabla de relación instructor-cursos (uno a muchos)
+    $sql_instructor_cursos = "
+        CREATE TABLE IF NOT EXISTS instructor_cursos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            instructor_id INTEGER NOT NULL,
+            curso_id INTEGER NOT NULL,
+            FOREIGN KEY (instructor_id) REFERENCES instructores(id) ON DELETE CASCADE,
+            FOREIGN KEY (curso_id) REFERENCES cursos(id) ON DELETE CASCADE
+        )
+    ";
+    $pdo->exec($sql_instructor_cursos);
+
     // Sin salida visible
 } catch (PDOException $e) {
     die("Error de conexión a la base de datos: " . $e->getMessage());
