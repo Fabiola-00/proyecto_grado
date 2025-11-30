@@ -91,6 +91,15 @@
                 <label for="fecha_fin">Fecha de Fin:</label>
                 <input type="date" id="fecha_fin" name="fecha_fin" required>
 
+                <!-- Estado -->
+                <label for="estado">Estado:</label>
+                <select id="estado" name="estado" required>
+                    <option value="">Seleccione...</option>
+                    <option value="Próximo">Próximo</option>
+                    <option value="En curso">En curso</option>
+                    <option value="Finalizado">Finalizado</option>
+                </select>
+
                 <!-- Observaciones -->
                 <label for="observaciones">Observaciones:</label>
                 <textarea id="observaciones" name="observaciones" rows="4" cols="60" placeholder="Observaciones adicionales (opcional)"></textarea>

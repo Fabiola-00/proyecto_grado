@@ -280,9 +280,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                     <label for="estado_edit">Estado:</label>
                     <select id="estado_edit" name="estado" required>
-                        <option value="proximo">Próximo</option>
-                        <option value="en curso">En Curso</option>
-                        <option value="finalizado">Finalizado</option>
+                        <option value="Próximo">Próximo</option>
+                        <option value="En curso">En curso</option>
+                        <option value="Finalizado">Finalizado</option>
                     </select>
 
                     <label for="observaciones_edit">Observaciones:</label>
