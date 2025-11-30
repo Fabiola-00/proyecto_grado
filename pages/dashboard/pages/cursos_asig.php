@@ -3,7 +3,7 @@ require_once 'data/db.php';
 
 // Obtener todos los instructores
 try {
-    $stmt = $pdo->query("SELECT id, codigo, nombres, apellido_paterno, apellido_materno FROM instructores ORDER BY apellido_paterno ASC");
+    $stmt = $pdo->query("SELECT id, codigo, nombres, apellido_paterno, apellido_materno, especialidad FROM instructores ORDER BY apellido_paterno ASC");
     $instructores = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo "<p class='error-message'>Error al cargar instructores: " . $e->getMessage() . "</p>";
@@ -182,7 +182,7 @@ try {
                                 <option value="">Seleccione un instructor...</option>
                                 <?php foreach ($instructores as $instructor): ?>
                                     <option value="<?= $instructor['id'] ?>">
-                                        <?= htmlspecialchars($instructor['codigo'] . ' - ' . $instructor['apellido_paterno'] . ' ' . $instructor['apellido_materno'] . ' ' . $instructor['nombres']) ?>
+                                        <?= htmlspecialchars($instructor['codigo'] . ' - ' . $instructor['apellido_paterno'] . ' ' . $instructor['apellido_materno'] . ' ' . $instructor['nombres'] . ' (' . $instructor['especialidad'] . ')') ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
