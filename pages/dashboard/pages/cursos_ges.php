@@ -1,11 +1,63 @@
 <?php
 require_once 'data/db.php';
 
-try {
-    $stmt = $pdo->query("SELECT * FROM cursos ORDER BY fecha_inicio DESC");
-    $cursos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo "<p class='error-message'>Error al cargar cursos: " . $e->getMessage() . "</p>";
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $accion = $_POST['accion'] ?? '';
+
+    if ($accion === 'editar') {
+        $id = intval($_POST['id']);
+        $tipo = $_POST['tipo'];
+        $entidad = $_POST['entidad'];
+        $nombre = $_POST['nombre'];
+        $fecha_inicio = $_POST['fecha_inicio'];
+        $fecha_fin = $_POST['fecha_fin'];
+        $estado = $_POST['estado'];
+        $observaciones = $_POST['observaciones'] ?? '';
+
+        try {
+            $stmt = $pdo->prepare("
+                UPDATE cursos SET
+                    tipo = ?,
+                    entidad = ?,
+                    nombre = ?,
+                    fecha_inicio = ?,
+                    fecha_fin = ?,
+                    estado = ?,
+                    observaciones = ?
+                WHERE id = ?
+            ");
+            $stmt->execute([
+                $tipo,
+                $entidad,
+                $nombre,
+                $fecha_inicio,
+                $fecha_fin,
+                $estado,
+                $observaciones,
+                $id
+            ]);
+
+            // Redirigir con mensaje de éxito
+            header("Location: cursos_ges.php?success=Datos actualizados correctamente");
+            exit();
+        } catch (PDOException $e) {
+            header("Location: cursos_ges.php?error=" . urlencode($e->getMessage()));
+            exit();
+        }
+    } elseif ($accion === 'eliminar') {
+        $id = intval($_POST['id']);
+
+        try {
+            $stmt = $pdo->prepare("DELETE FROM cursos WHERE id = ?");
+            $stmt->execute([$id]);
+
+            header("Location: cursos_ges.php?success=Curso eliminado correctamente");
+            exit();
+        } catch (PDOException $e) {
+            header("Location: cursos_ges.php?error=" . urlencode($e->getMessage()));
+            exit();
+        }
+    }
 }
 ?>
 
@@ -85,66 +137,6 @@ try {
     <!-- Contenido Principal -->
     <main id="content" class="content">
 
-        <?php
-        require_once 'data/db.php';
-
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $accion = $_POST['accion'] ?? '';
-
-            if ($accion === 'editar') {
-                $id = intval($_POST['id']);
-                $tipo = $_POST['tipo'];
-                $entidad = $_POST['entidad'];
-                $nombre = $_POST['nombre'];
-                $fecha_inicio = $_POST['fecha_inicio'];
-                $fecha_fin = $_POST['fecha_fin'];
-                $observaciones = $_POST['observaciones'] ?? '';
-
-                try {
-                    $stmt = $pdo->prepare("
-                UPDATE cursos SET
-                    tipo = ?,
-                    entidad = ?,
-                    nombre = ?,
-                    fecha_inicio = ?,
-                    fecha_fin = ?,
-                    observaciones = ?
-                WHERE id = ?
-            ");
-                    $stmt->execute([
-                        $tipo,
-                        $entidad,
-                        $nombre,
-                        $fecha_inicio,
-                        $fecha_fin,
-                        $observaciones,
-                        $id
-                    ]);
-
-                    // Redirigir con mensaje de éxito
-                    header("Location: cursos_ges.php?success=Datos actualizados correctamente");
-                    exit();
-                } catch (PDOException $e) {
-                    header("Location: cursos_ges.php?error=" . urlencode($e->getMessage()));
-                    exit();
-                }
-            } elseif ($accion === 'eliminar') {
-                $id = intval($_POST['id']);
-
-                try {
-                    $stmt = $pdo->prepare("DELETE FROM cursos WHERE id = ?");
-                    $stmt->execute([$id]);
-
-                    header("Location: cursos_ges.php?success=Curso eliminado correctamente");
-                    exit();
-                } catch (PDOException $e) {
-                    header("Location: cursos_ges.php?error=" . urlencode($e->getMessage()));
-                    exit();
-                }
-            }
-        }
-        ?>
-
         <!--******** Contenedor del formulario **********-->
 
         <div class="form-container">
@@ -195,6 +187,7 @@ try {
                         <th>Entidad</th>
                         <th>Fecha Inicio</th>
                         <th>Fecha Fin</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -243,6 +236,7 @@ try {
                             echo "<td>" . htmlspecialchars($curso['entidad']) . "</td>";
                             echo "<td>" . date('d/m/Y', strtotime($curso['fecha_inicio'])) . "</td>";
                             echo "<td>" . date('d/m/Y', strtotime($curso['fecha_fin'])) . "</td>";
+                            echo "<td>" . htmlspecialchars($curso['estado'] ?? '') . "</td>";
                             echo "<td>
                       <button onclick=\"abrirModal('editar', {$curso['id']})\" class='btn-edit'><i class='fas fa-edit'></i></button>
                       <button onclick=\"abrirModal('eliminar', {$curso['id']})\" class='btn-delete'><i class='fas fa-trash'></i></button>
@@ -250,7 +244,7 @@ try {
                             echo "</tr>";
                         }
                     } catch (PDOException $e) {
-                        echo "<tr><td colspan='6' class='error-message'>Error al cargar datos: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
+                        echo "<tr><td colspan='7' class='error-message'>Error al cargar datos: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
                     }
                     ?>
                 </tbody>
@@ -284,6 +278,13 @@ try {
                     <label for="fecha_fin_edit">Fecha de Fin:</label>
                     <input type="date" id="fecha_fin_edit" name="fecha_fin" required>
 
+                    <label for="estado_edit">Estado:</label>
+                    <select id="estado_edit" name="estado" required>
+                        <option value="proximo">Próximo</option>
+                        <option value="en curso">En Curso</option>
+                        <option value="finalizado">Finalizado</option>
+                    </select>
+
                     <label for="observaciones_edit">Observaciones:</label>
                     <textarea id="observaciones_edit" name="observaciones" rows="4"></textarea>
 
@@ -315,6 +316,7 @@ try {
                             document.getElementById('nombre_edit').value = data.nombre;
                             document.getElementById('fecha_inicio_edit').value = data.fecha_inicio;
                             document.getElementById('fecha_fin_edit').value = data.fecha_fin;
+                            document.getElementById('estado_edit').value = data.estado || 'proximo';
                             document.getElementById('observaciones_edit').value = data.observaciones || '';
 
                             document.getElementById('modalEditar').showModal();

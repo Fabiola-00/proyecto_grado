@@ -177,6 +177,7 @@ require_once 'data/db.php';
                             <th>Entidad</th>
                             <th>Fecha Inicio</th>
                             <th>Fecha Fin</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -205,7 +206,8 @@ require_once 'data/db.php';
                                     c.tipo,
                                     c.entidad,
                                     c.fecha_inicio,
-                                    c.fecha_fin
+                                    c.fecha_fin,
+                                    c.estado
                                 FROM instructor_cursos ic
                                 INNER JOIN instructores i ON ic.instructor_id = i.id
                                 INNER JOIN cursos c ON ic.curso_id = c.id
@@ -231,13 +233,14 @@ require_once 'data/db.php';
                                     echo "<td>" . htmlspecialchars($row['entidad']) . "</td>";
                                     echo "<td>" . date('d/m/Y', strtotime($row['fecha_inicio'])) . "</td>";
                                     echo "<td>" . date('d/m/Y', strtotime($row['fecha_fin'])) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['estado'] ?? '') . "</td>";
                                     echo "</tr>";
                                 }
                             } else {
-                                echo "<tr><td colspan='7' style='text-align:center;'>No se encontraron resultados</td></tr>";
+                                echo "<tr><td colspan='8' style='text-align:center;'>No se encontraron resultados</td></tr>";
                             }
                         } catch (PDOException $e) {
-                            echo "<tr><td colspan='7' class='error-message'>Error al cargar datos: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
+                            echo "<tr><td colspan='8' class='error-message'>Error al cargar datos: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
                         }
                         ?>
                     </tbody>

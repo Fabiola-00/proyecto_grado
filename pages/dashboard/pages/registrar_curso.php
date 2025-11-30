@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre = trim($_POST['nombre']);
     $fecha_inicio = $_POST['fecha_inicio'];
     $fecha_fin = $_POST['fecha_fin'];
+    $estado = trim($_POST['estado']);
     $observaciones = trim($_POST['observaciones'] ?? '');
 
     // Validar que la fecha de fin no sea anterior a la fecha de inicio
@@ -17,8 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     try {
         $stmt = $pdo->prepare("
-            INSERT INTO cursos (tipo, entidad, nombre, fecha_inicio, fecha_fin, observaciones)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO cursos (tipo, entidad, nombre, fecha_inicio, fecha_fin, estado, observaciones)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         ");
 
         $stmt->execute([
@@ -27,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $nombre,
             $fecha_inicio,
             $fecha_fin,
+            $estado,
             $observaciones
         ]);
 

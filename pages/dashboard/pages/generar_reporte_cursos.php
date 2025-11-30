@@ -30,6 +30,7 @@ $sql = "
         c.entidad,
         c.fecha_inicio,
         c.fecha_fin,
+        c.estado,
         c.observaciones
     FROM instructor_cursos ic
     INNER JOIN instructores i ON ic.instructor_id = i.id
@@ -232,6 +233,7 @@ try {
                     <th>Entidad</th>
                     <th>Fecha Inicio</th>
                     <th>Fecha Fin</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
@@ -245,11 +247,12 @@ try {
                             <td><?= htmlspecialchars($row['entidad']) ?></td>
                             <td><?= date('d/m/Y', strtotime($row['fecha_inicio'])) ?></td>
                             <td><?= date('d/m/Y', strtotime($row['fecha_fin'])) ?></td>
+                            <td><?= htmlspecialchars($row['estado'] ?? '') ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="7" style="text-align:center;">No se encontraron resultados</td>
+                        <td colspan="8" style="text-align:center;">No se encontraron resultados</td>
                     </tr>
                 <?php endif; ?>
             </tbody>

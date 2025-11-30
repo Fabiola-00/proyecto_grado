@@ -34,6 +34,7 @@ try {
             nombre TEXT NOT NULL,
             fecha_inicio DATE NOT NULL,
             fecha_fin DATE NOT NULL,
+            estado TEXT DEFAULT 'proximo',
             observaciones TEXT
         )
     ";

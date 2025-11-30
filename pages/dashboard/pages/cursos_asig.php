@@ -12,7 +12,7 @@ try {
 
 // Obtener todos los cursos
 try {
-    $stmt = $pdo->query("SELECT id, nombre, tipo, fecha_inicio, fecha_fin FROM cursos ORDER BY fecha_inicio DESC");
+    $stmt = $pdo->query("SELECT id, nombre, tipo, fecha_inicio, fecha_fin, estado FROM cursos ORDER BY fecha_inicio DESC");
     $cursos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo "<p class='error-message'>Error al cargar cursos: " . $e->getMessage() . "</p>";
@@ -194,7 +194,7 @@ try {
                                 <option value="">Seleccione un curso...</option>
                                 <?php foreach ($cursos as $curso): ?>
                                     <option value="<?= $curso['id'] ?>">
-                                        <?= htmlspecialchars($curso['nombre'] . ' (' . $curso['tipo'] . ')') ?>
+                                        <?= htmlspecialchars($curso['nombre'] . ' (' . $curso['tipo'] . ') - ' . ($curso['estado'] ?? 'proximo')) ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
@@ -214,6 +214,7 @@ try {
                         <th>Instructor</th>
                         <th>Curso</th>
                         <th>Tipo</th>
+                        <th>Estado</th>
                         <th>Fecha Inicio</th>
                         <th>Fecha Fin</th>
                         <th>Acciones</th>
@@ -232,7 +233,8 @@ try {
                                 c.nombre as curso_nombre,
                                 c.tipo,
                                 c.fecha_inicio,
-                                c.fecha_fin
+                                c.fecha_fin,
+                                c.estado
                             FROM instructor_cursos ic
                             INNER JOIN instructores i ON ic.instructor_id = i.id
                             INNER JOIN cursos c ON ic.curso_id = c.id
@@ -249,6 +251,7 @@ try {
                                 echo "<td>" . htmlspecialchars($asig['apellido_paterno'] . ' ' . $asig['apellido_materno'] . ' ' . $asig['nombres']) . "</td>";
                                 echo "<td>" . htmlspecialchars($asig['curso_nombre']) . "</td>";
                                 echo "<td>" . htmlspecialchars($asig['tipo']) . "</td>";
+                                echo "<td>" . htmlspecialchars($asig['estado'] ?? '') . "</td>";
                                 echo "<td>" . date('d/m/Y', strtotime($asig['fecha_inicio'])) . "</td>";
                                 echo "<td>" . date('d/m/Y', strtotime($asig['fecha_fin'])) . "</td>";
                                 echo "<td>
@@ -262,10 +265,10 @@ try {
                                 echo "</tr>";
                             }
                         } else {
-                            echo "<tr><td colspan='7' style='text-align:center;'>No hay asignaciones registradas</td></tr>";
+                            echo "<tr><td colspan='8' style='text-align:center;'>No hay asignaciones registradas</td></tr>";
                         }
                     } catch (PDOException $e) {
-                        echo "<tr><td colspan='7' class='error-message'>Error al cargar asignaciones: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
+                        echo "<tr><td colspan='8' class='error-message'>Error al cargar asignaciones: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
                     }
                     ?>
                 </tbody>
