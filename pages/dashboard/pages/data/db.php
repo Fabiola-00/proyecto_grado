@@ -52,6 +52,34 @@ try {
     ";
     $pdo->exec($sql_instructor_cursos);
 
+    // Crear tabla de operativos
+    $sql_operativos = "
+        CREATE TABLE IF NOT EXISTS operativos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            tipo TEXT NOT NULL,
+            entidad_responsable TEXT NOT NULL,
+            estado TEXT NOT NULL,
+            departamento TEXT NOT NULL,
+            zona TEXT NOT NULL,
+            fecha_inicio DATE NOT NULL,
+            fecha_final DATE NOT NULL
+        )
+    ";
+    $pdo->exec($sql_operativos);
+
+    // Crear tabla de relación instructor-operativos (uno a muchos)
+    $sql_instructor_operativos = "
+        CREATE TABLE IF NOT EXISTS instructor_operativos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            instructor_id INTEGER NOT NULL,
+            operativo_id INTEGER NOT NULL,
+            funcion TEXT NOT NULL DEFAULT 'Personal de rescate',
+            FOREIGN KEY (instructor_id) REFERENCES instructores(id) ON DELETE CASCADE,
+            FOREIGN KEY (operativo_id) REFERENCES operativos(id) ON DELETE CASCADE
+        )
+    ";
+    $pdo->exec($sql_instructor_operativos);
+
     // Sin salida visible
 } catch (PDOException $e) {
     die("Error de conexión a la base de datos: " . $e->getMessage());

@@ -407,6 +407,138 @@ try {
         </div>
     <?php endif; ?>
 
+    <!-- Sección de Cursos Asignados -->
+    <?php
+    try {
+        $stmtCursos = $pdo->prepare("
+            SELECT 
+                c.nombre,
+                c.tipo,
+                c.entidad,
+                c.fecha_inicio,
+                c.fecha_fin,
+                c.estado
+            FROM instructor_cursos ic
+            INNER JOIN cursos c ON ic.curso_id = c.id
+            WHERE ic.instructor_id = ?
+            ORDER BY c.fecha_inicio DESC
+        ");
+        $stmtCursos->execute([$id]);
+        $cursos = $stmtCursos->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        $cursos = [];
+        $errorCursos = $e->getMessage();
+    }
+    ?>
+
+    <?php if (!empty($cursos)): ?>
+        <div class="section">
+            <h2>Cursos Asignados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre del Curso</th>
+                        <th>Tipo</th>
+                        <th>Entidad</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($cursos as $curso): ?>
+                        <tr>
+                            <td style="text-align: left;"><?= htmlspecialchars($curso['nombre']) ?></td>
+                            <td><?= htmlspecialchars($curso['tipo']) ?></td>
+                            <td><?= htmlspecialchars($curso['entidad']) ?></td>
+                            <td><?= date('d/m/Y', strtotime($curso['fecha_inicio'])) ?></td>
+                            <td><?= date('d/m/Y', strtotime($curso['fecha_fin'])) ?></td>
+                            <td><?= htmlspecialchars($curso['estado'] ?? 'N/A') ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <p style="margin-top: 10px;"><strong>Total de cursos:</strong> <?= count($cursos) ?></p>
+        </div>
+    <?php else: ?>
+        <div class="section">
+            <h2>Cursos Asignados</h2>
+            <p>No tiene cursos asignados.</p>
+            <?php if (isset($errorCursos)): ?>
+                <p class="no-print" style="color: red; font-size: 0.8em;">Debug: <?= htmlspecialchars($errorCursos) ?></p>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+    <!-- Sección de Operativos Asignados -->
+    <?php
+    try {
+        $stmtOperativos = $pdo->prepare("
+            SELECT 
+                io.funcion,
+                o.tipo,
+                o.entidad_responsable,
+                o.departamento,
+                o.zona,
+                o.fecha_inicio,
+                o.fecha_final,
+                o.estado
+            FROM instructor_operativos io
+            INNER JOIN operativos o ON io.operativo_id = o.id
+            WHERE io.instructor_id = ?
+            ORDER BY o.fecha_inicio DESC
+        ");
+        $stmtOperativos->execute([$id]);
+        $operativos = $stmtOperativos->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        $operativos = [];
+        $errorOperativos = $e->getMessage();
+    }
+    ?>
+
+    <?php if (!empty($operativos)): ?>
+        <div class="section">
+            <h2>Operativos Asignados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Función</th>
+                        <th>Tipo</th>
+                        <th>Entidad Responsable</th>
+                        <th>Departamento</th>
+                        <th>Zona</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Final</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($operativos as $operativo): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($operativo['funcion'] ?? 'N/A') ?></td>
+                            <td><?= htmlspecialchars($operativo['tipo']) ?></td>
+                            <td style="text-align: left;"><?= htmlspecialchars($operativo['entidad_responsable']) ?></td>
+                            <td><?= htmlspecialchars($operativo['departamento']) ?></td>
+                            <td><?= htmlspecialchars($operativo['zona']) ?></td>
+                            <td><?= date('d/m/Y', strtotime($operativo['fecha_inicio'])) ?></td>
+                            <td><?= date('d/m/Y', strtotime($operativo['fecha_final'])) ?></td>
+                            <td><?= htmlspecialchars($operativo['estado']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <p style="margin-top: 10px;"><strong>Total de operativos:</strong> <?= count($operativos) ?></p>
+        </div>
+    <?php else: ?>
+        <div class="section">
+            <h2>Operativos Asignados</h2>
+            <p>No tiene operativos asignados.</p>
+            <?php if (isset($errorOperativos)): ?>
+                <p class="no-print" style="color: red; font-size: 0.8em;">Debug: <?= htmlspecialchars($errorOperativos) ?></p>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
     <div class="footer">
         <p>Generado el <?= date('d/m/Y') ?></p>
         <p>SBRAB - La Paz, Bolivia</p>

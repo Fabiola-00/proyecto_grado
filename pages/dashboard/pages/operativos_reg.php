@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SICOSE - Operativos</title>
+    <title>SICOSE - Registro de Operativos</title>
     <link rel="shortcut icon" href="../icons/escudo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="css_pages/css_instructores1.css">
@@ -53,36 +53,73 @@
     <!--  *******************************************************************************************    -->
     <!-- Contenido Principal -->
     <main id="content" class="content">
-        <h2>Operativos</h2><br>
-        <div class="container">
-            <!-- Botón para REGISTRO -->
-            <a href="operativos_reg.php" class="button">
-                <img src="icons/operativos_reg.png" alt="Registro de Operativos">
-                <span>REGISTRO OPERATIVOS</span>
-            </a>
+        <br>
+        <div class="form-container">
+            <h2>Registro de Operativo</h2>
 
-            <!-- Botón para GESTION -->
-            <a href="operativos_ges.php" class="button">
-                <img src="icons/operativos_ges.png" alt="Gestion de Operativos">
-                <span>GESTIÓN OPERATIVOS</span>
-            </a>
+            <?php if (isset($_GET['success'])): ?>
+                <div class="success-message">Operativo registrado correctamente.</div>
+            <?php elseif (isset($_GET['error'])): ?>
+                <div class="error-message"><?= htmlspecialchars($_GET['error']) ?></div>
+            <?php endif; ?>
 
-            <!-- Botón para ASIGNACION -->
-            <a href="operativos_asig.php" class="button">
-                <img src="icons/operativos_asig.png" alt="Asignación de Operativos">
-                <span>ASIGNACIÓN OPERATIVOS</span>
-            </a>
+            <form action="registrar_operativo.php" method="POST">
+                <!-- Tipo -->
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="">Seleccione...</option>
+                    <option value="Preventivo">Preventivo</option>
+                    <option value="Reactivo">Reactivo</option>
+                    <option value="Especial">Especial</option>
+                    <option value="Emergencia">Emergencia</option>
+                </select>
+
+                <!-- Entidad Responsable -->
+                <label for="entidad_responsable">Entidad Responsable:</label>
+                <input type="text" id="entidad_responsable" name="entidad_responsable" required autocomplete="off" placeholder="Nombre de la entidad responsable">
+
+                <!-- Estado -->
+                <label for="estado">Estado:</label>
+                <select id="estado" name="estado" required>
+                    <option value="">Seleccione...</option>
+                    <option value="Planificado">Planificado</option>
+                    <option value="En ejecución">En ejecución</option>
+                    <option value="Finalizado">Finalizado</option>
+                    <option value="Suspendido">Suspendido</option>
+                </select>
+
+                <!-- Departamento -->
+                <label for="departamento">Departamento:</label>
+                <input type="text" id="departamento" name="departamento" required autocomplete="off" placeholder="Departamento">
+
+                <!-- Zona -->
+                <label for="zona">Zona:</label>
+                <input type="text" id="zona" name="zona" required autocomplete="off" placeholder="Zona del operativo">
+
+                <!-- Fecha de Inicio -->
+                <label for="fecha_inicio">Fecha de Inicio:</label>
+                <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+
+                <!-- Fecha Final -->
+                <label for="fecha_final">Fecha Final:</label>
+                <input type="date" id="fecha_final" name="fecha_final" required>
+
+                <br><br>
+                <!-- Botón -->
+                <button type="submit" class="btn-registro">Registrar Operativo</button>
+            </form>
         </div>
+
     </main>
     <!--  *******************************************************************************************    -->
     <!-- Script para funcionalidad del menú -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const sidebar = document.getElementById('sidebar');
             const toggleBtn = document.getElementById('toggleSidebar');
             const body = document.body;
 
-            toggleBtn.addEventListener('click', function () {
+            toggleBtn.addEventListener('click', function() {
                 body.classList.toggle('sidebar-collapsed');
                 // Accesibilidad
                 const isCollapsed = body.classList.contains('sidebar-collapsed');
