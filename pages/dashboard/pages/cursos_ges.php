@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <aside id="sidebar" class="sidebar">
         <nav class="sidebar-nav">
             <ul>
-                <li><a href="../inicio.html" class="menu-item"><img src="../icons/home.png" alt="Inicio" class="icon" />
+                <li><a href="../inicio.php" class="menu-item"><img src="../icons/home.png" alt="Inicio" class="icon" />
                         <span class="text">Inicio</span></a></li>
                 <li><a href="instructores.html" class="menu-item"><img src="../icons/instructores.png" alt="Registro"
                             class="icon" />
@@ -125,9 +125,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <span class="text">Cursos</span></a></li>
                 <li><a href="#" class="menu-item"><img src="../icons/operativos.png" alt="Operativos" class="icon" />
                         <span class="text">Operativos</span></a></li>
-                <li><a href="#" class="menu-item"><img src="../icons/settings.png" alt="Configuración" class="icon" />
-                        <span class="text">Configuración</span></a></li>
-                <li><a href="../../login.html" class="menu-item"><img src="../icons/salir.png" alt="Salir" class="icon" />
+
+                <li><a href="../logout.php" class="menu-item"><img src="../icons/salir.png" alt="Salir" class="icon" />
                         <span class="text">Salir</span></a></li>
             </ul>
         </nav>

@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <button type="submit" class="login-btn">Ingresar</button>
 
                     <div class="login-footer">
-                        <p>¿Problemas para ingresar? <a href="../pages/404.html">Contacte al administrador</a></p>
+                        <p>Acceso para el: <a href="#">Administrador</a></p>
                     </div>
                 </form>
             </div>

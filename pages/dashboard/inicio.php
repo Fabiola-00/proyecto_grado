@@ -31,19 +31,19 @@ require_once 'auth.php';
             <ul>
                 <li><a href="#" class="menu-item"><img src="icons/home.png" alt="Inicio" class="icon" />
                         <span class="text">Inicio</span></a></li>
-                <li><a href="pages/instructores.php" class="menu-item"><img src="icons/instructores.png" alt="Registro"
+                <li><a href="pages/instructores.html" class="menu-item"><img src="icons/instructores.png" alt="Registro"
                             class="icon" />
                         <span class="text">Instructores</span></a></li>
-                <li><a href="pages/asistencia.php" class="menu-item"><img src="icons/asistencia.png" alt="Asistencia"
+                <li><a href="pages/asistencia.html" class="menu-item"><img src="icons/asistencia.png" alt="Asistencia"
                             class="icon" />
                         <span class="text">Asistencia</span></a></li>
-                <li><a href="pages/reportes.php" class="menu-item"><img src="icons/reportes.png" alt="Reportes"
+                <li><a href="pages/reportes.html" class="menu-item"><img src="icons/reportes.png" alt="Reportes"
                             class="icon" />
                         <span class="text">Reportes</span></a></li>
-                <li><a href="pages/cursos.php" class="menu-item"><img src="icons/cursos.png" alt="Cursos"
+                <li><a href="pages/cursos.html" class="menu-item"><img src="icons/cursos.png" alt="Cursos"
                             class="icon" />
                         <span class="text">Cursos</span></a></li>
-                <li><a href="pages/operativos.php" class="menu-item"><img src="icons/operativos.png" alt="Operativos"
+                <li><a href="pages/operativos.html" class="menu-item"><img src="icons/operativos.png" alt="Operativos"
                             class="icon" />
                         <span class="text">Operativos</span></a></li>
 
