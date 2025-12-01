@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Test de Redirección</title>
+</head>
+
+<body>
+    <h1>Test de Autenticación</h1>
+    <button onclick="testLogin()">Probar Login</button>
+    <div id="resultado"></div>
+
+    <script>
+        async function testLogin() {
+            const resultado = document.getElementById('resultado');
+            resultado.innerHTML = '<p>Probando autenticación...</p>';
+
+            try {
+                const response = await fetch('authenticate.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: 'admin',
+                        password: 'admin123'
+                    })
+                });
+
+                console.log('Status:', response.status);
+                const data = await response.json();
+                console.log('Respuesta completa:', data);
+
+                resultado.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+
+                if (data.success) {
+                    resultado.innerHTML += '<p style="color: green;">✓ Autenticación exitosa</p>';
+                    resultado.innerHTML += '<p>Redirect URL: ' + data.redirect + '</p>';
+                    resultado.innerHTML += '<p>Redirigiendo en 3 segundos...</p>';
+
+                    setTimeout(() => {
+                        window.location.href = data.redirect || 'dashboard/inicio.php';
+                    }, 3000);
+                } else {
+                    resultado.innerHTML += '<p style="color: red;">✗ Autenticación fallida</p>';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                resultado.innerHTML = '<p style="color: red;">Error: ' + error.message + '</p>';
+            }
+        }
+    </script>
+</body>
+
+</html>

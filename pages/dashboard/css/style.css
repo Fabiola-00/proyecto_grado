@@ -18,9 +18,11 @@ body {
 body.sidebar-collapsed .sidebar {
   width: 64px;
 }
+
 body.sidebar-collapsed .menu-item .text {
   display: none;
 }
+
 body.sidebar-collapsed .menu-item .icon {
   margin-right: 0;
   justify-content: center;
@@ -70,10 +72,12 @@ body.sidebar-collapsed .menu-item .icon {
 /* Menú lateral */
 .sidebar {
   position: fixed;
-  top: 60px; /* Ajusta el top para evitar superposición con la barra superior */
+  top: 60px;
+  /* Ajusta el top para evitar superposición con la barra superior */
   left: 0;
   width: 180px;
-  height: calc(100% - 64px); /* Ajusta la altura para evitar superposición */
+  height: calc(100% - 64px);
+  /* Ajusta la altura para evitar superposición */
   background-color: #003366;
   color: white;
   transition: width 0.3s ease;
@@ -84,7 +88,8 @@ body.sidebar-collapsed .menu-item .icon {
 .sidebar .sidebar-nav ul {
   list-style: none;
   padding: 5px;
-  margin-top: 0; /* Elimina el margen superior innecesario */
+  margin-top: 0;
+  /* Elimina el margen superior innecesario */
 }
 
 .sidebar .sidebar-nav li {
@@ -129,9 +134,17 @@ body.sidebar-collapsed .menu-item .icon {
   margin-left: 145px;
   padding: 85px;
   flex: 1;
-  background-color: #fff;
+  background-color: #ffffff;
   min-height: 100vh;
-  transition: margin-left 0.3s ease;  
+  transition: margin-left 0.3s ease;
+  background-image: url('../images/fondo.png');
+  background-size: cover;
+  background-position: center;
+
+}
+
+.content .bienvenida {
+  background: #333;
 }
 
 /* Estado colapsado */
@@ -143,7 +156,7 @@ body.sidebar-collapsed .content {
 .menu-item .icon img {
   width: 24px;
   height: 24px;
-  
+
 }
 
 /* Responsive - Mobile */
@@ -156,4 +169,3 @@ body.sidebar-collapsed .content {
     width: 64px;
   }
 }
-
