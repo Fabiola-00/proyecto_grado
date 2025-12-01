@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f9;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,23 +14,14 @@ h2 {
     margin-bottom: 2rem;
 }
 
-.container {
-    background: white;
-    padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    max-width: 900px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
+/* .container removed to use .form-container from css_instructores1.css */
 
 .form-group {
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #dcdcdc;
     padding-bottom: 10px;
 }
 
@@ -45,7 +36,7 @@ label {
     flex: 1;
 }
 
-input {
+.eval-input {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 6px;
@@ -55,32 +46,12 @@ input {
     transition: border-color 0.3s;
 }
 
-input:focus {
+.eval-input:focus {
     border-color: #3498db;
     outline: none;
 }
 
-button {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    width: 100%;
-    margin-top: 20px;
-    transition: background 0.3s, transform 0.1s;
-}
-
-button:hover {
-    background-color: #2980b9;
-}
-
-button:active {
-    transform: scale(0.98);
-}
+/* Generic button styles removed to use .btn-registro */
 
 #resultado {
     margin-top: 20px;

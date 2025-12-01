@@ -102,21 +102,20 @@ if (isset($_POST['guardar_evaluacion'])) {
     <!--  *******************************************************************************************    -->
     <!-- Contenido Principal -->
     <main id="content" class="content">
-
-        <div class="container">
+        <br>
+        <div class="form-container">
             <h2>Evaluación de Instructores</h2>
 
             <!-- Buscador de Instructor -->
-            <form method="POST" action="" style="width: 100%; margin-bottom: 5px;">
-                <div class="form-group" style="justify-content: center; gap: 10px;">
-                    <label for="codigo_instructor" style="flex: 0 0 auto;">Código Instructor:</label>
-                    <input autocomplete="off" type="text" name="codigo_instructor" id="codigo_instructor" required style="width: 150px;">
-                    <button type="submit" name="buscar_instructor" style="width: auto; margin-top: 0; padding: 8px 15px;">Buscar</button>
+            <form method="POST" action="" style="margin-bottom: 20px;">
+                <label for="codigo_instructor">Código Instructor:</label>
+                <div style="display: flex; gap: 10px;">
+                    <input autocomplete="off" type="text" name="codigo_instructor" id="codigo_instructor" required placeholder="Ingrese código" style="margin-bottom: 0; flex: 1;">
+                    <button type="submit" name="buscar_instructor" class="btn-registro" style="width: auto; padding: 0.75rem 1.5rem;">Buscar</button>
                 </div>
             </form>
 
             <?php
-            // Lógica de búsqueda
             $instructor_encontrado = null;
             $mensaje_error = "";
             $codigo_buscado = "";
@@ -147,51 +146,53 @@ if (isset($_POST['guardar_evaluacion'])) {
             ?>
 
             <?php if ($instructor_encontrado): ?>
-                <div style="text-align: center; margin-bottom: 10px; color: #27ae60; font-weight: bold;">
+                <div class="success-message" style="margin-bottom: 20px;">
                     <p id="instructor-info">Sr. <?php echo htmlspecialchars($instructor_encontrado['grado'] . ' ' . $instructor_encontrado['apellido_paterno'] . ' ' . $instructor_encontrado['nombres']); ?> (<?php echo htmlspecialchars($instructor_encontrado['estado']); ?>)</p>
                     <input type="hidden" id="instructor_id" value="<?php echo $instructor_encontrado['id']; ?>">
                 </div>
             <?php elseif ($mensaje_error): ?>
-                <div style="text-align: center; margin-bottom: 10px; color: #e74c3c; font-weight: bold;">
+                <div class="error-message" style="margin-bottom: 20px;">
                     <p><?php echo $mensaje_error; ?></p>
                 </div>
             <?php endif; ?>
 
-            <div id="form-container">
+            <div id="evaluation-inputs">
                 <!-- Inputs de evaluación -->
-                <div class="form-group"><label>EE (estabilidad emocional) 0-3 baja, 4-6 media, 7-10 alta</label><input min="0" max="10"
+                <div class="form-group"><label>EE (estabilidad emocional) 0-3 baja, 4-6 media, 7-10 alta</label><input class="eval-input" min="0" max="10"
                         type="number" id="input-0" value="0">
                 </div>
-                <div class="form-group"><label>ME (manejo del estrés) 0-13 bajo, 14-26 moderado, 27-40 alto</label><input min="0" max="40" type="number"
+                <div class="form-group"><label>ME (manejo del estrés) 0-13 bajo, 14-26 moderado, 27-40 alto</label><input class="eval-input" min="0" max="40" type="number"
                         id="input-1" value="0">
                 </div>
-                <div class="form-group"><label>RE (resiliencia) 0-15 baja, 26-50 media, 51-76 alta</label><input min="0" max="76" type="number"
+                <div class="form-group"><label>RE (resiliencia) 0-15 baja, 26-50 media, 51-76 alta</label><input class="eval-input" min="0" max="76" type="number"
                         id="input-2" value="0">
                 </div>
-                <div class="form-group"><label>TE (trabajo en equipo) 1 líder, 2 coordinador, 3 observador, 4 ejecutor</label><input min="1" max="4" type="number"
+                <div class="form-group"><label>TE (trabajo en equipo) 1 líder, 2 coordinador, 3 observador, 4 ejecutor</label><input class="eval-input" min="1" max="4" type="number"
                         id="input-3" value="1">
                 </div>
-                <div class="form-group"><label>VS (vocación de servicio) 0 a 100</label><input min="0" max="100"
+                <div class="form-group"><label>VS (vocación de servicio) 0 a 100</label><input class="eval-input" min="0" max="100"
                         type="number" id="input-4" value="0"></div>
-                <div class="form-group"><label>RS (responsabilidad) 1 bajo, 2 medio, 3 alto</label><input min="1" max="3" type="number"
+                <div class="form-group"><label>RS (responsabilidad) 1 bajo, 2 medio, 3 alto</label><input class="eval-input" min="1" max="3" type="number"
                         id="input-5" value="1">
                 </div>
-                <div class="form-group"><label>DI (disciplina) 0-10 baja, 11-20 media, 21-30 alta</label><input min="0" max="30" type="number"
+                <div class="form-group"><label>DI (disciplina) 0-10 baja, 11-20 media, 21-30 alta</label><input class="eval-input" min="0" max="30" type="number"
                         id="input-6" value="0">
                 </div>
-                <div class="form-group"><label>TD (toma de decisiones) 1 bajo, 2 medio, 3 alto</label><input min="1" max="3" type="number"
+                <div class="form-group"><label>TD (toma de decisiones) 1 bajo, 2 medio, 3 alto</label><input class="eval-input" min="1" max="3" type="number"
                         id="input-7" value="1">
                 </div>
-                <div class="form-group"><label>EM (empatía) 0-8 baja, 9-18 media, 19-28 alta</label><input min="0" max="28" type="number" id="input-8"
+                <div class="form-group"><label>EM (empatía) 0-8 baja, 9-18 media, 19-28 alta</label><input class="eval-input" min="0" max="28" type="number" id="input-8"
                         value="0">
                 </div>
             </div>
             <br>
 
-            <button onclick="predecir()">Evaluar</button>
+            <button onclick="predecir()" class="btn-registro" style="margin-bottom: 10px;">Evaluar</button>
             <p id="resultado"></p>
-            <button type="button" onclick="guardarEvaluacion()" style="margin-right:10px;">Guardar Evaluación</button>
-            <button type="button" onclick="resetForm()">Reiniciar</button>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <button type="button" onclick="guardarEvaluacion()" class="btn-registro" style="background-color: #28a745;">Guardar Evaluación</button>
+                <button type="button" onclick="resetForm()" class="btn-registro" style="background-color: #dc3545;">Reiniciar</button>
+            </div>
         </div>
 
     </main>
@@ -332,44 +333,33 @@ if (isset($_POST['guardar_evaluacion'])) {
                     body: formData
                 });
                 const data = await response.json();
-
                 if (data.status === 'success') {
                     alert(data.message);
+                    resetForm();
                 } else {
                     alert(data.message);
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('Error al procesar la solicitud.');
+                alert('Error al guardar la evaluación.');
             }
         }
 
         function resetForm() {
-            // Reiniciar inputs a sus valores por defecto
-            const defaults = [0, 0, 0, 1, 0, 1, 0, 1, 0];
             for (let i = 0; i < 9; i++) {
-                document.getElementById(`input-${i}`).value = defaults[i];
+                document.getElementById(`input-${i}`).value = (i === 3 || i === 5 || i === 7) ? 1 : 0;
             }
-
-            // Limpiar resultado y variables globales
-            document.getElementById('resultado').innerHTML = "";
+            document.getElementById("resultado").innerHTML = "";
             currentConclusion = null;
             currentRecomendacion = "";
-
-            // Limpiar info instructor y busqueda
-            const instructorInfo = document.getElementById('instructor-info');
-            if (instructorInfo) {
-                instructorInfo.innerHTML = "";
-                instructorInfo.style.display = "none"; // Ocultar el div vacio
-            }
-            // Assuming 'codigo_instructor' is the ID of the search input for the instructor
-            const searchInput = document.getElementById('codigo_instructor');
-            if (searchInput) {
-                searchInput.value = "";
-            }
+            document.getElementById('instructor_id').value = "";
+            document.getElementById('instructor-info').innerText = "";
+            const successMsg = document.querySelector('.success-message');
+            if (successMsg) successMsg.remove();
+            const errorMsg = document.querySelector('.error-message');
+            if (errorMsg) errorMsg.remove();
+            document.getElementById('codigo_instructor').value = "";
         }
-
-        cargarModelo();
     </script>
 </body>
 
