@@ -159,30 +159,30 @@ if (isset($_POST['guardar_evaluacion'])) {
 
             <div id="form-container">
                 <!-- Inputs de evaluación -->
-                <div class="form-group"><label>EE (Estabilidad Emocional) 0 - 10</label><input min="0" max="10"
+                <div class="form-group"><label>EE (estabilidad emocional) 0-3 baja, 4-6 media, 7-10 alta</label><input min="0" max="10"
                         type="number" id="input-0" value="0">
                 </div>
-                <div class="form-group"><label>ME (Manejo del Estrés) 0 - 40</label><input min="0" max="40" type="number"
+                <div class="form-group"><label>ME (manejo del estrés) 0-13 bajo, 14-26 moderado, 27-40 alto</label><input min="0" max="40" type="number"
                         id="input-1" value="0">
                 </div>
-                <div class="form-group"><label>RE (Resiliencia) 0 - 76</label><input min="0" max="76" type="number"
+                <div class="form-group"><label>RE (resiliencia) 0-15 baja, 26-50 media, 51-76 alta</label><input min="0" max="76" type="number"
                         id="input-2" value="0">
                 </div>
-                <div class="form-group"><label>TE (Trabajo en Equipo) 1 - 4</label><input min="1" max="4" type="number"
+                <div class="form-group"><label>TE (trabajo en equipo) 1 líder, 2 coordinador, 3 observador, 4 ejecutor</label><input min="1" max="4" type="number"
                         id="input-3" value="1">
                 </div>
-                <div class="form-group"><label>VS (Vocación de Servicio) 0 - 100</label><input min="0" max="100"
+                <div class="form-group"><label>VS (vocación de servicio) 0 a 100</label><input min="0" max="100"
                         type="number" id="input-4" value="0"></div>
-                <div class="form-group"><label>RS (Responsabilidad) 1 - 3</label><input min="1" max="3" type="number"
+                <div class="form-group"><label>RS (responsabilidad) 1 bajo, 2 medio, 3 alto</label><input min="1" max="3" type="number"
                         id="input-5" value="1">
                 </div>
-                <div class="form-group"><label>DI (Disciplina) 0 - 30</label><input min="0" max="30" type="number"
+                <div class="form-group"><label>DI (disciplina) 0-10 baja, 11-20 media, 21-30 alta</label><input min="0" max="30" type="number"
                         id="input-6" value="0">
                 </div>
-                <div class="form-group"><label>TD (Toma de Decisiones) 1 - 3</label><input min="1" max="3" type="number"
+                <div class="form-group"><label>TD (toma de decisiones) 1 bajo, 2 medio, 3 alto</label><input min="1" max="3" type="number"
                         id="input-7" value="1">
                 </div>
-                <div class="form-group"><label>EM (Empatía) 0 - 28</label><input min="0" max="28" type="number" id="input-8"
+                <div class="form-group"><label>EM (empatía) 0-8 baja, 9-18 media, 19-28 alta</label><input min="0" max="28" type="number" id="input-8"
                         value="0">
                 </div>
             </div>

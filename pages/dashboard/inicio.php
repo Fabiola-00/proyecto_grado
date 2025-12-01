@@ -1,3 +1,6 @@
+<?php
+require_once 'auth.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -28,23 +31,23 @@
             <ul>
                 <li><a href="#" class="menu-item"><img src="icons/home.png" alt="Inicio" class="icon" />
                         <span class="text">Inicio</span></a></li>
-                <li><a href="pages/instructores.html" class="menu-item"><img src="icons/instructores.png" alt="Registro"
+                <li><a href="pages/instructores.php" class="menu-item"><img src="icons/instructores.png" alt="Registro"
                             class="icon" />
                         <span class="text">Instructores</span></a></li>
-                <li><a href="pages/asistencia.html" class="menu-item"><img src="icons/asistencia.png" alt="Asistencia"
+                <li><a href="pages/asistencia.php" class="menu-item"><img src="icons/asistencia.png" alt="Asistencia"
                             class="icon" />
                         <span class="text">Asistencia</span></a></li>
-                <li><a href="pages/reportes.html" class="menu-item"><img src="icons/reportes.png" alt="Reportes"
+                <li><a href="pages/reportes.php" class="menu-item"><img src="icons/reportes.png" alt="Reportes"
                             class="icon" />
                         <span class="text">Reportes</span></a></li>
-                <li><a href="pages/cursos.html" class="menu-item"><img src="icons/cursos.png" alt="Cursos"
+                <li><a href="pages/cursos.php" class="menu-item"><img src="icons/cursos.png" alt="Cursos"
                             class="icon" />
                         <span class="text">Cursos</span></a></li>
-                <li><a href="pages/operativos.html" class="menu-item"><img src="icons/operativos.png" alt="Operativos"
+                <li><a href="pages/operativos.php" class="menu-item"><img src="icons/operativos.png" alt="Operativos"
                             class="icon" />
                         <span class="text">Operativos</span></a></li>
 
-                <li><a href="../login.html" class="menu-item"><img src="icons/salir.png" alt="Salir" class="icon" />
+                <li><a href="logout.php" class="menu-item"><img src="icons/salir.png" alt="Salir" class="icon" />
                         <span class="text">Salir</span></a></li>
             </ul>
         </nav>
@@ -62,12 +65,12 @@
     <!--  *******************************************************************************************    -->
     <!-- Script para funcionalidad del menú -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const sidebar = document.getElementById('sidebar');
             const toggleBtn = document.getElementById('toggleSidebar');
             const body = document.body;
 
-            toggleBtn.addEventListener('click', function () {
+            toggleBtn.addEventListener('click', function() {
                 body.classList.toggle('sidebar-collapsed');
                 // Accesibilidad
                 const isCollapsed = body.classList.contains('sidebar-collapsed');
