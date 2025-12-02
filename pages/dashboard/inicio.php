@@ -9,7 +9,7 @@ require_once 'auth.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SICOSE - Inicio</title>
     <link rel="shortcut icon" href="icons/escudo.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>" />
 </head>
 
 <body class="sidebar-expanded">
@@ -55,7 +55,7 @@ require_once 'auth.php';
 
     <!--  *******************************************************************************************    -->
     <!-- Contenido Principal -->
-    <main id="content" class="content">
+    <main id="content" class="content" style="background: url('images/fondo.png') no-repeat center center; background-size: cover;">
         <div class="bienvenida">
             <h1>Bienvenido a SICOSE</h1>
             <p>Sistema de Control y Seguimiento.</p>

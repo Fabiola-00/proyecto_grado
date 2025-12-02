@@ -134,17 +134,11 @@ body.sidebar-collapsed .menu-item .icon {
   margin-left: 145px;
   padding: 85px;
   flex: 1;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   min-height: 100vh;
   transition: margin-left 0.3s ease;
-  background-image: url('../images/fondo.png');
-  background-size: cover;
-  background-position: center;
-
-}
-
-.content .bienvenida {
-  background: #333;
+  background: url('../images/fondo.png') no-repeat center center !important;
+  background-size: cover !important;
 }
 
 /* Estado colapsado */
@@ -156,7 +150,6 @@ body.sidebar-collapsed .content {
 .menu-item .icon img {
   width: 24px;
   height: 24px;
-
 }
 
 /* Responsive - Mobile */
