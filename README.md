@@ -8,7 +8,7 @@ Para poder instalar SICOSE solo se necesita contar con un servidor Web con Apach
 ## Credenciales
 Para acceder al sistema utilice las siguientes credenciales de prueba:
 - Usuario: admin
-- Contraseña: pass
+- Contraseña: admin123
   
 Y para acceder al panel de Administrador:
 - PIN: 3690
