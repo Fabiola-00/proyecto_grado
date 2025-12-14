@@ -236,3 +236,68 @@ BD existe: SI
 Conexión a BD exitosa
 Usuario encontrado: SI
 Autenticación EXITOSA
+2025-12-02 00:59:02 - Inicio de autenticación
+Usuario recibido: admin
+Ruta BD: C:\laragon\www\sistema_sbrab\pages/dashboard/pages/data/db_sbrab.sqlite
+BD existe: SI
+Conexión a BD exitosa
+Usuario encontrado: SI
+Autenticación EXITOSA
+2025-12-02 14:06:31 - Inicio de autenticación
+Usuario recibido: admin
+Ruta BD: C:\laragon\www\sistema_sbrab\pages/dashboard/pages/data/db_sbrab.sqlite
+BD existe: SI
+Conexión a BD exitosa
+Usuario encontrado: SI
+Autenticación FALLIDA - Contraseña incorrecta
+2025-12-02 14:06:38 - Inicio de autenticación
+Usuario recibido: admin
+Ruta BD: C:\laragon\www\sistema_sbrab\pages/dashboard/pages/data/db_sbrab.sqlite
+BD existe: SI
+Conexión a BD exitosa
+Usuario encontrado: SI
+Autenticación EXITOSA
+2025-12-11 22:57:35 - Inicio de autenticación
+Usuario recibido: admin
+Ruta BD: C:\laragon\www\sistema_sbrab\pages/dashboard/pages/data/db_sbrab.sqlite
+BD existe: SI
+Conexión a BD exitosa
+Usuario encontrado: SI
+Autenticación EXITOSA
+2025-12-14 00:56:15 - Inicio de autenticación
+Usuario recibido: admin
+Ruta BD: C:\laragon\www\sistema_sbrab\pages/dashboard/pages/data/db_sbrab.sqlite
+BD existe: SI
+Error en autenticación: could not find driver
+2025-12-14 00:56:21 - Inicio de autenticación
+Usuario recibido: admin
+Ruta BD: C:\laragon\www\sistema_sbrab\pages/dashboard/pages/data/db_sbrab.sqlite
+BD existe: SI
+Error en autenticación: could not find driver
+2025-12-14 00:56:28 - Inicio de autenticación
+Usuario recibido: admin
+Ruta BD: C:\laragon\www\sistema_sbrab\pages/dashboard/pages/data/db_sbrab.sqlite
+BD existe: SI
+Error en autenticación: could not find driver
+2025-12-14 00:56:32 - Inicio de autenticación
+Usuario recibido: admin
+Ruta BD: C:\laragon\www\sistema_sbrab\pages/dashboard/pages/data/db_sbrab.sqlite
+BD existe: SI
+Error en autenticación: could not find driver
+2025-12-14 00:56:40 - Inicio de autenticación
+Usuario recibido: delta
+Ruta BD: C:\laragon\www\sistema_sbrab\pages/dashboard/pages/data/db_sbrab.sqlite
+BD existe: SI
+Error en autenticación: could not find driver
+2025-12-14 00:58:00 - Inicio de autenticación
+Usuario recibido: admin
+Ruta BD: C:\laragon\www\sistema_sbrab\pages/dashboard/pages/data/db_sbrab.sqlite
+BD existe: SI
+Error en autenticación: could not find driver
+2025-12-14 01:03:16 - Inicio de autenticación
+Usuario recibido: admin
+Ruta BD: C:\laragon\www\sistema_sbrab\pages/dashboard/pages/data/db_sbrab.sqlite
+BD existe: SI
+Conexión a BD exitosa
+Usuario encontrado: SI
+Autenticación EXITOSA

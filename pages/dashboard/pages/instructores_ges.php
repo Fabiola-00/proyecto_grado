@@ -284,7 +284,9 @@ try {
       <dialog id="modalEditar" class="modal">
         <form method="POST" class="modal-content">
           <h3>Editar Instructor</h3>
+          <input type="hidden" name="accion" value="editar">
           <input type="hidden" id="instructor_id" name="id">
+          
           <label for="codigo_edit">Código:</label>
           <input type="text" id="codigo_edit" name="codigo" required pattern="[A-Za-z]{3}\d{6}" title="Ejemplo: ABC123456">
 
@@ -320,10 +322,35 @@ try {
             <option value="Rescate en Montaña">Rescate en Montaña</option>
             <option value="Rescate en Selva">Rescate en Selva</option>
             <option value="Lucha contra incendios">Lucha contra incendios</option>
+            <option value="Natación">Natación</option>
+            <option value="K-9">K-9</option>
+          </select>
+
+          <label for="estado_edit">Estado:</label>
+          <select id="estado_edit" name="estado" required>
+             <option value="Evaluado">Evaluado</option>
+             <option value="No evaluado">No evaluado</option>
+          </select>
+
+          <div style="margin-top: 20px; text-align: right;">
+            <button type="submit">Guardar Cambios</button>
+            <button type="button" onclick="cerrarModal()">Cancelar</button>
+          </div>
+        </form>
+      </dialog>
+
+      <!-- Modal de eliminación -->
+      <dialog id="modalEliminar" class="modal">
+        <form method="POST" class="modal-content" style="text-align: center;">
             <h3>¿Está seguro de eliminar este instructor?</h3>
+            <p>Esta acción no se puede deshacer.</p>
+            <input type="hidden" name="accion" value="eliminar">
             <input type="hidden" id="instructor_id_eliminar" name="id">
-            <button type="submit" name="accion" value="eliminar">Sí, eliminar</button>
-            <button type="button" onclick="cerrarModal()">No, cancelar</button>
+            
+            <div style="margin-top: 20px;">
+                <button type="submit" style="background-color: #dc3545; color: white; border: none; padding: 10px 20px; cursor: pointer;">Sí, eliminar</button>
+                <button type="button" onclick="cerrarModal()" style="margin-left: 10px;">No, cancelar</button>
+            </div>
         </form>
       </dialog>
     </div>
@@ -354,8 +381,10 @@ try {
       }
 
       function cerrarModal() {
-        document.getElementById('modalEditar').close();
-        document.getElementById('modalEliminar').close();
+        const modalEditar = document.getElementById('modalEditar');
+        const modalEliminar = document.getElementById('modalEliminar');
+        if (modalEditar && modalEditar.open) modalEditar.close();
+        if (modalEliminar && modalEliminar.open) modalEliminar.close();
       }
     </script>
 
